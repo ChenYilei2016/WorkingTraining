@@ -3,6 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>work-common-domain</module>
+        <module>work-common-utils</module>
+        <module>work-common-api</module>
+        <module>work-common</module>
+        <module>work-web-admin</module>
+        <module>work-common-web</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -19,6 +27,11 @@
     <properties>
         <java.version>1.8</java.version> <!--jdk 版本-->
         <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+        <commons-io.version>1.3.2</commons-io.version>
+        <swagger.version>2.9.2</swagger.version>
+        <hutool.version>4.5.17</hutool.version>
+        <druid-spring-boot-starter.version>1.1.18</druid-spring-boot-starter.version>
+        <mapper-spring-boot-starter.version>2.1.5</mapper-spring-boot-starter.version>
     </properties>
 
 
@@ -35,6 +48,38 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${mapper-spring-boot-starter.version}</version>
+            </dependency>
+
         </dependencies>
 
 
@@ -49,12 +94,41 @@
 
     <developers>
         <developer>
-            <name>chenyilei</name>
+            <name>陈忆磊</name>
             <email>705029004@qq.com</email>
+            <roles>
+                <role>admin</role>
+            </roles>
         </developer>
         <developer>
-            <name>shenyusheng</name>
+            <name>沈昱晟</name>
             <email>387951297@qq.com</email>
+            <roles>
+                <role>member</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>王艺超</name>
+            <email>997149672@qq.com</email>
+            <roles>
+                <role>member</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>黄世超</name>
+            <email>826978931@qq.com</email>
+            <roles>
+                <role>member</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>童曹云</name>
+            <email>1206232457@qq.com</email>
+            <roles>
+                <role>member</role>
+            </roles>
         </developer>
     </developers>
+
+
 </project>

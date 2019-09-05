@@ -1,0 +1,14 @@
+package cn.chenyilei.work.web.mapper;
+
+import cn.chenyilei.work.domain.pojo.TbUser;
+import tk.mybatis.mapper.common.Mapper;
+
+/**
+ * 注释
+ *
+ * @author chenyilei
+ * @email 705029004@qq.com
+ * @date 2019/09/05 15:18
+ */
+public interface UserMapper extends Mapper<TbUser> {
+}
