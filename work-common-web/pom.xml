@@ -15,11 +15,6 @@
 
         <dependency>
             <groupId>cn.chenyilei</groupId>
-            <artifactId>work-common-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.chenyilei</groupId>
             <artifactId>work-common-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -47,7 +42,10 @@
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

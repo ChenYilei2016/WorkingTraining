@@ -17,9 +17,10 @@ import javax.persistence.Table;
 @Table(name = "tb_user")
 @Data
 public class TbUser {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 

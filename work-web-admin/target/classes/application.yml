@@ -21,9 +21,16 @@ spring:
       filters: stat
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
+  # 关闭网页缓存
   thymeleaf:
     cache: false
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+cyl:
+  enabled-swagger: true
+
+#logging:
+#  path: C:\\Users\\Administrator\\Desktop\\

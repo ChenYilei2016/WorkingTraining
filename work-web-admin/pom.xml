@@ -18,6 +18,11 @@
             <version>${parent.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

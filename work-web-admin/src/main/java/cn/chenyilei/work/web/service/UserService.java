@@ -1,5 +1,7 @@
 package cn.chenyilei.work.web.service;
 
+import cn.chenyilei.work.domain.pojo.TbUser;
+
 /**
  * 注释
  *
@@ -7,5 +9,5 @@ package cn.chenyilei.work.web.service;
  * @email 705029004@qq.com
  * @date 2019/09/05 15:38
  */
-public interface UserService {
+public interface UserService  {
 }

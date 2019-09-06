@@ -18,26 +18,37 @@ import java.util.List;
 public class CommonServiceImpl <T,S extends Mapper<T>> implements CommonService<T> {
 
     @Autowired
-    S s;
+    S dao;
 
     @Override
     public int insert(T t) {
-        return s.insert(t);
+        return dao.insert(t);
     }
 
     @Override
     public int delete(T t) {
-        return s.delete(t);
+        return dao.delete(t);
+    }
+
+    @Override
+    public int deleteById(int id) {
+        return dao.deleteByPrimaryKey(id);
     }
 
     @Override
     public int update(T t) {
-        return s.updateByPrimaryKey(t);
+        return dao.updateByPrimaryKey(t);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<T> select(T t) {
-        return s.select(t);
+        return dao.select(t);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public T selectById(int id) {
+        return dao.selectByPrimaryKey(id);
     }
 }

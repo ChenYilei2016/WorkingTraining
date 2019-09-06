@@ -12,4 +12,16 @@
     <artifactId>work-common-utils</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>cn.chenyilei</groupId>
+            <artifactId>work-common-domain</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>
