@@ -1,5 +1,8 @@
 server:
   port: 8080
+  servlet:
+    session:
+      timeout: 1
 spring:
   application:
     name: work-admin
@@ -31,6 +34,5 @@ mybatis:
 
 cyl:
   enabled-swagger: true
-
 #logging:
 #  path: C:\\Users\\Administrator\\Desktop\\

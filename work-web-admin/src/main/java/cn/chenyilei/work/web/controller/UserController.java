@@ -1,9 +1,6 @@
 package cn.chenyilei.work.web.controller;
 
 import cn.chenyilei.work.domain.pojo.TbUser;
-import cn.chenyilei.work.web.mapper.UserMapper;
-import cn.chenyilei.work.web.service.UserService;
-import cn.chenyilei.work.web.service.impl.CommonServiceImpl;
 import cn.chenyilei.work.web.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

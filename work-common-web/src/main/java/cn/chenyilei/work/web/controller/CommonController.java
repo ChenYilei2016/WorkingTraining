@@ -2,15 +2,9 @@ package cn.chenyilei.work.web.controller;
 
 import cn.chenyilei.work.domain.vo.AjaxResult;
 import cn.chenyilei.work.web.service.CommonService;
-import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 通用Controller模版
