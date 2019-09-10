@@ -2,7 +2,7 @@ server:
   port: 8080
   servlet:
     session:
-      timeout: 1
+      timeout: 1800000 # 30分钟过期session
 spring:
   application:
     name: work-admin
@@ -31,16 +31,29 @@ spring:
     user:
       name: root
       password: root
+  jackson:
+    default-property-inclusion: non_null
+#  session:
+#    store-type: redis
+
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
 
-#################  以下为系统特别变量  ###################
+#################  以下为个人自定义特别变量  ###################
 cyl:
   enabled-swagger: true #启用swagger文档
+  login-path: /authentication/login
   login-page: /index.html
-
+  login-type: normal #  登陆方式 normal 或 jwt形式,可扩展
+  ssl:
+    enabled-ssl: false
+    keyStore: 'C:\\Users\\Administrator\\Desktop\\School\\WorkingTraining\\work-web-admin\\src\\main\\resources\\resources\\chenyilei.jks'
+    keyPassword: 1230
+    keyStoreType: JKS
+  permit-all-when-no-filter: true  #没有拦截器的时候,不保护任何地址
+  token-header: Authorization
 
 #logging:
 #  path: C:\\Users\\Administrator\\Desktop\\  #日志打印位置

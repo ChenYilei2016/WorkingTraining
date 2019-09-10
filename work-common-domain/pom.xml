@@ -17,6 +17,11 @@
             <artifactId>work-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>

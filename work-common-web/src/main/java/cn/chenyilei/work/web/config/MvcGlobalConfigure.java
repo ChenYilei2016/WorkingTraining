@@ -1,6 +1,7 @@
 package cn.chenyilei.work.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @email 705029004@qq.com
  * @date 2019/09/09 16:02
  */
-@Controller
+@Configuration
 public class MvcGlobalConfigure implements WebMvcConfigurer {
 
     private class CharsetCodeInterceptor extends HandlerInterceptorAdapter{

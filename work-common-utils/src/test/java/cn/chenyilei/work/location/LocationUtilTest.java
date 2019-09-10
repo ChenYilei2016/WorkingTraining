@@ -2,6 +2,8 @@ package cn.chenyilei.work.location;
 
 import org.junit.Test;
 
+import java.time.Duration;
+
 import static org.junit.Assert.*;
 
 /**
@@ -16,5 +18,10 @@ public class LocationUtilTest {
     @Test
     public void getLocationByIP() {
         System.out.println(LocationUtil.getLocationByIP("106.12.74.218"));
+    }
+
+    @Test
+    public void check(){
+        System.out.println(Duration.ofMinutes(30).toMillis());
     }
 }
