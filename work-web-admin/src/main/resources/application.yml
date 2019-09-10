@@ -27,12 +27,20 @@ spring:
   # 关闭网页缓存
   thymeleaf:
     cache: false
+  security:
+    user:
+      name: root
+      password: root
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
 
+#################  以下为系统特别变量  ###################
 cyl:
-  enabled-swagger: true
+  enabled-swagger: true #启用swagger文档
+  login-page: /index.html
+
+
 #logging:
-#  path: C:\\Users\\Administrator\\Desktop\\
+#  path: C:\\Users\\Administrator\\Desktop\\  #日志打印位置

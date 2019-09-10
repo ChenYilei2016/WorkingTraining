@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.ComponentScan;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -13,13 +14,15 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @email 705029004@qq.com
  * @date 2019/09/05 14:08
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "cn.chenyilei.work")
 @MapperScan(basePackages = "cn.chenyilei.work.web.mapper")
 public class WebAdminApplication {
     public static void main(String[] args) {
+
         new SpringApplicationBuilder(WebAdminApplication.class)
                 .run(args);
-         LoggerFactory.getLogger(WebAdminApplication.class).error("aaa");
+
+         LoggerFactory.getLogger(WebAdminApplication.class).info("=======启动完成!========");
     }
 
 }
