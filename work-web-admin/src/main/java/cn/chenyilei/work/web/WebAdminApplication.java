@@ -3,6 +3,7 @@ package cn.chenyilei.work.web;
 import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.slf4j.Logger;
@@ -20,6 +21,8 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import tk.mybatis.spring.annotation.MapperScan;
+
+import javax.net.ssl.SSLException;
 
 /**
  * 服务启动类
@@ -48,12 +51,16 @@ public class WebAdminApplication implements CommandLineRunner {
         return new WebServerFactoryCustomizer() {
             @Override
             public void customize(WebServerFactory factory) {
-                TomcatServletWebServerFactory tomcatServletWebServerFactory = (TomcatServletWebServerFactory) factory;
-                Ssl ssl = new Ssl();
-                ssl.setKeyStore(webSecurityProperties.getSsl().getKeyStore());
-                ssl.setKeyPassword(webSecurityProperties.getSsl().getKeyPassword());
-                ssl.setKeyStoreType(webSecurityProperties.getSsl().getKeyStoreType());
-                tomcatServletWebServerFactory.setSsl(ssl);
+                if( factory instanceof TomcatServletWebServerFactory ){
+                    TomcatServletWebServerFactory tomcatServletWebServerFactory = (TomcatServletWebServerFactory) factory;
+                    Ssl ssl = new Ssl();
+                    ssl.setKeyStore(webSecurityProperties.getSsl().getKeyStore());
+                    ssl.setKeyPassword(webSecurityProperties.getSsl().getKeyPassword());
+                    ssl.setKeyStoreType(webSecurityProperties.getSsl().getKeyStoreType());
+                    tomcatServletWebServerFactory.setSsl(ssl);
+                }else{
+                    throw new RuntimeException("没有适合的web容器能够使用SSL证书!");
+                }
             }
         };
     }

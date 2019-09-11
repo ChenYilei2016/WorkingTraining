@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,10 +80,15 @@ public class MapperUtils {
      * @return
      * @throws Exception
      */
-    public static <T> Map<String, Object> json2map(String jsonString) throws Exception {
+    public static <T> Map<String, Object> json2map(String jsonString) throws RuntimeException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        return mapper.readValue(jsonString, Map.class);
+        try {
+            return mapper.readValue(jsonString, Map.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        throw new RuntimeException("JSON参数有误");
     }
 
     /**

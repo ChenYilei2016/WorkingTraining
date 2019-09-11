@@ -13,7 +13,7 @@ import lombok.Getter;
  * @email 705029004@qq.com
  * @date 2019/09/10 18:23
  */
-public enum FilterType {
+public enum AuthenticationType {
     none,
     normal,
     jwt

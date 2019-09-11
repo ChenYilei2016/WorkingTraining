@@ -2,9 +2,11 @@ package cn.chenyilei.work.web.security.filter.jwt;
 
 import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
 import cn.chenyilei.work.web.security.filter.FilterConfiguration;
+import cn.chenyilei.work.web.security.processor.AuthenticationFilterProcessorContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,13 +22,16 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
  */
 @Slf4j
 @Configuration
-@ConditionalOnProperty(prefix = "cyl",name ="login-type",havingValue = "jwt",matchIfMissing = false)
+@ConditionalOnProperty(prefix = "cyl",name ="authentication-type",havingValue = "jwt",matchIfMissing = false)
 public class JwtFilterConfiguration implements FilterConfiguration {
     @Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
     WebSecurityProperties webSecurityProperties;
+
+    @Autowired
+    AuthenticationFilterProcessorContextHolder authenticationFilterProcessorContextHolder;
 
     @Override
     public void filterConfig(HttpSecurity http) throws Exception{
@@ -36,8 +41,10 @@ public class JwtFilterConfiguration implements FilterConfiguration {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         //进行登陆验证过滤器
-        JwtCreateAuthenticationFilter jwtCreateAuthenticationFilter = new JwtCreateAuthenticationFilter(webSecurityProperties);
+        JwtCreateAuthenticationFilter jwtCreateAuthenticationFilter =
+                new JwtCreateAuthenticationFilter(webSecurityProperties,authenticationFilterProcessorContextHolder);
         jwtCreateAuthenticationFilter.setAuthenticationManager(authenticationManager);
+        jwtCreateAuthenticationFilter.nowInit();
         http.addFilterBefore(jwtCreateAuthenticationFilter, LogoutFilter.class);
 
         //获取用户信息过滤器

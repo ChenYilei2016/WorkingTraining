@@ -10,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
-import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +30,8 @@ import java.io.IOException;
  * @email 705029004@qq.com
  * @date 2019/09/09 14:12
  */
-@RequestMapping("/")
 @Controller
+@RequestMapping("/")
 @ConditionalOnClass(WebSecurityConfigurerAdapter.class)
 public class RequireController {
     @Autowired
@@ -46,11 +44,11 @@ public class RequireController {
                         Authentication authentication,
                        HttpServletRequest request,
                        HttpServletResponse response) throws IOException {
-        return  "authentication:"+authentication+"\n " +
+        String data = "authentication:"+authentication+"\n " +
                 "user: "+user+ "\n"+
                 "Url:"+request.getRequestURL()+"\n " +
                 "Uri:"+request.getRequestURI()+"\n";
-
+        return AjaxResult.success(data,"一次成功的请求!");
     }
 
     //没有登录的信息返回

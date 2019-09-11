@@ -1,7 +1,5 @@
 package cn.chenyilei.work.domain.vo;
 
-import cn.chenyilei.work.domain.security.AuthenticationUser;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

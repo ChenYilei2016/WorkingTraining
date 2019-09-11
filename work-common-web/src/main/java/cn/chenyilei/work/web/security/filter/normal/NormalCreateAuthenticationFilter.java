@@ -5,6 +5,8 @@ import cn.chenyilei.work.domain.vo.AjaxResult;
 import cn.chenyilei.work.utils.MapperUtils;
 import cn.chenyilei.work.utils.MvcUtils;
 import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
+import cn.chenyilei.work.web.security.processor.AuthenticationFilterProcessorContextHolder;
+import org.apache.commons.io.IOUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -18,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 注释
@@ -29,16 +32,20 @@ import java.io.IOException;
 public class NormalCreateAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     private WebSecurityProperties webSecurityProperties;
+    private AuthenticationFilterProcessorContextHolder authenticationFilterProcessorContextHolder;
 
     public NormalCreateAuthenticationFilter(WebSecurityProperties webSecurityProperties) {
         //拦截url默认为 /authentication/login 的POST请求
         super(new AntPathRequestMatcher(webSecurityProperties.getLoginPath(), "POST"));
         this.webSecurityProperties = webSecurityProperties;
-
-        nowInit();
     }
 
-    private void nowInit() {
+    public NormalCreateAuthenticationFilter(WebSecurityProperties webSecurityProperties, AuthenticationFilterProcessorContextHolder authenticationFilterProcessorContextHolder) {
+        this(webSecurityProperties);
+        this.authenticationFilterProcessorContextHolder = authenticationFilterProcessorContextHolder;
+    }
+
+    public void nowInit() {
         this.setAuthenticationSuccessHandler(new SuccessHandler());
         this.setAuthenticationFailureHandler(new FailureHandler());
         //不将认证后的context放入session
@@ -48,23 +55,9 @@ public class NormalCreateAuthenticationFilter extends AbstractAuthenticationProc
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        if (username == null) {
-            username = "";
-        }
-        if (password == null) {
-            password = "";
-        }
-        username = username.trim();
-        /**
-         * 可以直接生成一个token 用其他的验证方式
-         */
-        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username,password);
-        setDetails(request, authRequest);
-
-        return getAuthenticationManager().authenticate(authRequest);
+        return authenticationFilterProcessorContextHolder
+                .findFilterProcessorByRequest(request)
+                .doAttemptAuthentication(request,response,getAuthenticationManager());
     }
 
     protected void setDetails(HttpServletRequest request,
@@ -84,6 +77,7 @@ public class NormalCreateAuthenticationFilter extends AbstractAuthenticationProc
              * 可自定义登陆成功返回信息
              */
             AuthenticationUser user = (AuthenticationUser) authentication.getPrincipal();
+            user.setPassword("");
 
             MvcUtils.setAjaxResponse(response);
             response.setStatus(200);
@@ -103,7 +97,7 @@ public class NormalCreateAuthenticationFilter extends AbstractAuthenticationProc
                                             AuthenticationException exception) throws IOException, ServletException, AuthenticationException {
             MvcUtils.setAjaxResponse(response);
             response.setStatus(401);
-            AjaxResult error = AjaxResult.error("登陆信息有误!");
+            AjaxResult error = AjaxResult.error(exception.getMessage());
             response.getWriter().print(MapperUtils.obj2json(error));
         }
     }

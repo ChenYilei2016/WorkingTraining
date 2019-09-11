@@ -2,7 +2,6 @@ package cn.chenyilei.work.web.security.service;
 
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;

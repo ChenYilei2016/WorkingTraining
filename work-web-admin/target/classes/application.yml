@@ -44,9 +44,9 @@ mybatis:
 #################  以下为个人自定义特别变量  ###################
 cyl:
   enabled-swagger: true #启用swagger文档
-  login-path: /authentication/login
+  login-path: /authentication/login/*
   login-page: /index.html
-  login-type: jwt  #登陆方式 normal 或 jwt形式,可扩展
+  authentication-type: normal  #登陆方式 normal 或 jwt形式,可扩展
   ssl:
     enabled-ssl: false
     keyStore: 'C:\\Users\\Administrator\\Desktop\\School\\WorkingTraining\\work-web-admin\\src\\main\\resources\\resources\\chenyilei.jks'

@@ -1,21 +1,14 @@
 package cn.chenyilei.work.utils;
 
 import cn.chenyilei.work.domain.security.AuthenticationUser;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.sound.sampled.Line;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
-
-import static org.junit.Assert.*;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * 注释

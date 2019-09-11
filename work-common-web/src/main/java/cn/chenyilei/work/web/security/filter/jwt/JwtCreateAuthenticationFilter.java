@@ -6,10 +6,10 @@ import cn.chenyilei.work.utils.JwtUtil;
 import cn.chenyilei.work.utils.MapperUtils;
 import cn.chenyilei.work.utils.MvcUtils;
 import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
+import cn.chenyilei.work.web.security.processor.AuthenticationFilterProcessorContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -32,14 +32,20 @@ import java.io.IOException;
  */
 public class JwtCreateAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     private WebSecurityProperties webSecurityProperties ;
+    private AuthenticationFilterProcessorContextHolder authenticationFilterProcessorContextHolder;
+
 
     public JwtCreateAuthenticationFilter(WebSecurityProperties webSecurityProperties) {
         super(new AntPathRequestMatcher(webSecurityProperties.getLoginPath(), "POST"));
         this.webSecurityProperties = webSecurityProperties;
-        nowInit();
     }
 
-    private void nowInit() {
+    public JwtCreateAuthenticationFilter(WebSecurityProperties webSecurityProperties, AuthenticationFilterProcessorContextHolder authenticationFilterProcessorContextHolder) {
+        this(webSecurityProperties);
+        this.authenticationFilterProcessorContextHolder = authenticationFilterProcessorContextHolder;
+    }
+
+    public void nowInit() {
         this.setAuthenticationSuccessHandler(new SuccessHandler());
         this.setAuthenticationFailureHandler(new FailureHandler());
         //不将认证后的context放入session
@@ -48,27 +54,29 @@ public class JwtCreateAuthenticationFilter extends AbstractAuthenticationProcess
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-//        //TODO 要有个效验，然后在转换
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        if (username == null) {
-            username = "";
-        }
-        if (password == null) {
-            password = "";
-        }
-        username = username.trim();
-        /**
-         * 可以直接生成一个token 用其他的验证方式 {@link AuthenticationUser}
-         */
-//        AuthenticationUser authenticationUser = new AuthenticationUser();
-//        authenticationUser.setUserId(122L);
-//        authenticationUser.setUsername("12312312");
-//        authenticationUser.setAuthorities(AuthorityUtils.createAuthorityList("123"));
-//        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(authenticationUser,null,AuthorityUtils.createAuthorityList("123"));
-        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username,password);
-        setDetails(request, authRequest);
-        return getAuthenticationManager().authenticate(authRequest);
+//        String username = request.getParameter("username");
+//        String password = request.getParameter("password");
+//        if (username == null) {
+//            username = "";
+//        }
+//        if (password == null) {
+//            password = "";
+//        }
+//        username = username.trim();
+//        /**
+//         * 可以直接生成一个token 用其他的验证方式 {@link AuthenticationUser}
+//         */
+////        AuthenticationUser authenticationUser = new AuthenticationUser();
+////        authenticationUser.setUserId(122L);
+////        authenticationUser.setUsername("12312312");
+////        authenticationUser.setAuthorities(AuthorityUtils.createAuthorityList("123"));
+////        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(authenticationUser,null,AuthorityUtils.createAuthorityList("123"));
+//        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username,password);
+//        setDetails(request, authRequest);
+//        return getAuthenticationManager().authenticate(authRequest);
+        return authenticationFilterProcessorContextHolder
+                .findFilterProcessorByRequest(request)
+                .doAttemptAuthentication(request,response,getAuthenticationManager());
     }
 
     protected void setDetails(HttpServletRequest request,
@@ -107,7 +115,7 @@ public class JwtCreateAuthenticationFilter extends AbstractAuthenticationProcess
                                             AuthenticationException exception) throws IOException, ServletException, AuthenticationException {
             MvcUtils.setAjaxResponse(response);
             response.setStatus(401);
-            AjaxResult error = AjaxResult.error("登陆信息有误!");
+            AjaxResult error = AjaxResult.error(exception.getMessage());
             response.getWriter().print(MapperUtils.obj2json(error));
         }
     }
