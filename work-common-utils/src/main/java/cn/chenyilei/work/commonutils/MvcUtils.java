@@ -1,4 +1,4 @@
-package cn.chenyilei.work.utils;
+package cn.chenyilei.work.commonutils;
 
 import javax.servlet.http.HttpServletResponse;
 

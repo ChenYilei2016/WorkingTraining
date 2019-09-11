@@ -1,8 +1,8 @@
 package cn.chenyilei.work.web.security.exception;
 
 import cn.chenyilei.work.domain.vo.AjaxResult;
-import cn.chenyilei.work.utils.MapperUtils;
-import cn.chenyilei.work.utils.MvcUtils;
+import cn.chenyilei.work.commonutils.MapperUtils;
+import cn.chenyilei.work.commonutils.MvcUtils;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * 注释

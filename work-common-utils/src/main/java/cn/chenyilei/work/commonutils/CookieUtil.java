@@ -1,4 +1,4 @@
-package cn.chenyilei.work.utils;
+package cn.chenyilei.work.commonutils;
 
 import org.apache.commons.lang3.StringUtils;
 

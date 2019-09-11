@@ -2,10 +2,11 @@ package cn.chenyilei.work.web.security.filter.jwt;
 
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.domain.vo.AjaxResult;
-import cn.chenyilei.work.utils.JwtUtil;
-import cn.chenyilei.work.utils.MapperUtils;
-import cn.chenyilei.work.utils.MvcUtils;
-import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
+import cn.chenyilei.work.commonutils.JwtUtil;
+import cn.chenyilei.work.commonutils.MapperUtils;
+
+import cn.chenyilei.work.commonutils.MvcUtils;
+import cn.chenyilei.work.web.constant.WebSecurityProperties;
 import cn.chenyilei.work.web.security.processor.AuthenticationFilterProcessorContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -35,7 +36,7 @@ public class JwtCreateAuthenticationFilter extends AbstractAuthenticationProcess
     private AuthenticationFilterProcessorContextHolder authenticationFilterProcessorContextHolder;
 
 
-    public JwtCreateAuthenticationFilter(WebSecurityProperties webSecurityProperties) {
+    private JwtCreateAuthenticationFilter(WebSecurityProperties webSecurityProperties) {
         super(new AntPathRequestMatcher(webSecurityProperties.getLoginPath(), "POST"));
         this.webSecurityProperties = webSecurityProperties;
     }
@@ -84,7 +85,7 @@ public class JwtCreateAuthenticationFilter extends AbstractAuthenticationProcess
         authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
     }
     /**
-    /**
+     /**
      * 用户名和密码效验正确的处理器
      * 生成一个token
      */

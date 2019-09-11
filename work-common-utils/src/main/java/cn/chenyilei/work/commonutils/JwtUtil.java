@@ -1,4 +1,4 @@
-package cn.chenyilei.work.utils;
+package cn.chenyilei.work.commonutils;
 
 
 import cn.chenyilei.work.domain.security.AuthenticationUser;
@@ -32,7 +32,7 @@ public class JwtUtil implements InitializingBean, EnvironmentAware {
 
     /**
      * 默认加密密钥
-     * @see {@link application.yml  cyl.jwt.keySecret}
+     * application.yml  cyl.jwt.keySecret
      */
     private static byte[] KEYSECRET = "www.chenyilei.cn".getBytes();
     //凭证过期时长
@@ -65,18 +65,20 @@ public class JwtUtil implements InitializingBean, EnvironmentAware {
                 .parseClaimsJws(jwt)
                 .getBody();
         AuthenticationUser authenticationUser = new AuthenticationUser();
-        authenticationUser.setUserId(Long.valueOf(body.get("userId").toString()));
-        authenticationUser.setUsername(body.get("username").toString());
+        authenticationUser.setUserId(Objects.toString(body.get("userId")));
+        authenticationUser.setUsername(Objects.toString(body.get("username")));
 
         //解析authorities
-        List<LinkedHashMap<String, String>> authorities = (List<LinkedHashMap<String, String>>) body.get("authorities");
-        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
-        for (LinkedHashMap hashMap : authorities){
-            String authority = hashMap.get("authority").toString();
-            grantedAuthorityList.add(new SimpleGrantedAuthority(authority));
+        if(body.containsKey("authorities")){
+            List<LinkedHashMap<String, String>> authorities = (List<LinkedHashMap<String, String>>) body.get("authorities");
+            List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
+            for (LinkedHashMap hashMap : authorities){
+                String authority = hashMap.get("authority").toString();
+                grantedAuthorityList.add(new SimpleGrantedAuthority(authority));
+            }
+            authenticationUser.setAuthorities(grantedAuthorityList);
         }
 
-        authenticationUser.setAuthorities(grantedAuthorityList);
         return authenticationUser;
     }
 

@@ -1,8 +1,8 @@
 package cn.chenyilei.work.web.security.filter.jwt;
 
 import cn.chenyilei.work.domain.security.AuthenticationUser;
-import cn.chenyilei.work.utils.JwtUtil;
-import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
+import cn.chenyilei.work.commonutils.JwtUtil;
+import cn.chenyilei.work.web.constant.WebSecurityProperties;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
@@ -70,7 +70,7 @@ public class JwtCheckAuthenticationFilter extends OncePerRequestFilter {
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(authenticationUser,null,authenticationUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(auth);
         auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        log.info("authenticated user {}, setting security context",  authenticationUser.getUsername() );
+//        log.info("authenticated user {}, setting security context",  authenticationUser.getUsername() );
 
         chain.doFilter(request,response);
     }

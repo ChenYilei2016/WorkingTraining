@@ -9,5 +9,5 @@ import cn.chenyilei.work.domain.pojo.TbUser;
  * @email 705029004@qq.com
  * @date 2019/09/05 15:38
  */
-public interface UserService  {
+public interface TbUserService {
 }

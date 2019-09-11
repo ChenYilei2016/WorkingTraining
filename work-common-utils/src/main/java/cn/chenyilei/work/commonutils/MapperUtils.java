@@ -1,4 +1,4 @@
-package cn.chenyilei.work.utils;
+package cn.chenyilei.work.commonutils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;

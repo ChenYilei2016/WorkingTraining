@@ -1,4 +1,4 @@
-package cn.chenyilei.work.utils;
+package cn.chenyilei.work.commonutils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

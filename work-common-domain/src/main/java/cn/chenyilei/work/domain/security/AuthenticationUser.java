@@ -20,13 +20,13 @@ import java.util.Collection;
 @NoArgsConstructor
 public class AuthenticationUser implements UserDetails {
 
-    private Long userId;
+    private String userId;
     private String username;
     @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public AuthenticationUser(Long userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public AuthenticationUser(String userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.userId = userId;
         this.username = username;
         this.password = password;

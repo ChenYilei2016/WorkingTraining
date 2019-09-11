@@ -1,4 +1,4 @@
-package cn.chenyilei.work.utils;
+package cn.chenyilei.work.commonutils;
 
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class JwtUtilTest {
     public void createJWT() throws UnsupportedEncodingException {
 
         AuthenticationUser authenticationUser = new AuthenticationUser();
-        authenticationUser.setUserId(123123L);
+        authenticationUser.setUserId("123123123");
         authenticationUser.setUsername("rooot");
         authenticationUser.setAuthorities(AuthorityUtils.createAuthorityList("123"));
         String jwt = JwtUtil.createJWT(authenticationUser);

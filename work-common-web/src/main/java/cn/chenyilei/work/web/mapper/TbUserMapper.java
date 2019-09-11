@@ -10,5 +10,5 @@ import tk.mybatis.mapper.common.Mapper;
  * @email 705029004@qq.com
  * @date 2019/09/05 15:18
  */
-public interface UserMapper extends Mapper<TbUser> {
+public interface TbUserMapper extends Mapper<TbUser> {
 }

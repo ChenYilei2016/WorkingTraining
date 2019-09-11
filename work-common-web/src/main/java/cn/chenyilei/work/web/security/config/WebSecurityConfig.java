@@ -1,6 +1,7 @@
 package cn.chenyilei.work.web.security.config;
 
-import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
+
+import cn.chenyilei.work.web.constant.WebSecurityProperties;
 import cn.chenyilei.work.web.security.exception.AuthenticationAccessDeniedHandler;
 import cn.chenyilei.work.web.security.exception.AuthenticationFailEntryPoint;
 import cn.chenyilei.work.web.security.filter.FilterConfiguration;
@@ -15,14 +16,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package cn.chenyilei.work.web.controller;
 
 import cn.chenyilei.work.domain.pojo.TbUser;
-import cn.chenyilei.work.web.service.impl.UserServiceImpl;
+import cn.chenyilei.work.web.service.impl.TbTbUserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @RequestMapping("/user")
 @Controller
-public class UserController extends CommonController<TbUser, UserServiceImpl>{
+public class TbUserController extends CommonController<TbUser, TbTbUserServiceImpl>{
 
 }

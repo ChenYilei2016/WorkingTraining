@@ -2,11 +2,10 @@ package cn.chenyilei.work.web.security.filter.normal;
 
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.domain.vo.AjaxResult;
-import cn.chenyilei.work.utils.MapperUtils;
-import cn.chenyilei.work.utils.MvcUtils;
-import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
+import cn.chenyilei.work.commonutils.MapperUtils;
+import cn.chenyilei.work.commonutils.MvcUtils;
+import cn.chenyilei.work.web.constant.WebSecurityProperties;
 import cn.chenyilei.work.web.security.processor.AuthenticationFilterProcessorContextHolder;
-import org.apache.commons.io.IOUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -20,7 +19,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * 注释
@@ -34,7 +32,7 @@ public class NormalCreateAuthenticationFilter extends AbstractAuthenticationProc
     private WebSecurityProperties webSecurityProperties;
     private AuthenticationFilterProcessorContextHolder authenticationFilterProcessorContextHolder;
 
-    public NormalCreateAuthenticationFilter(WebSecurityProperties webSecurityProperties) {
+    private NormalCreateAuthenticationFilter(WebSecurityProperties webSecurityProperties) {
         //拦截url默认为 /authentication/login 的POST请求
         super(new AntPathRequestMatcher(webSecurityProperties.getLoginPath(), "POST"));
         this.webSecurityProperties = webSecurityProperties;

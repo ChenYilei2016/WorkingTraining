@@ -1,4 +1,4 @@
-package cn.chenyilei.work.web.security.constant.internal;
+package cn.chenyilei.work.web.constant.internal;
 
 import lombok.Data;
 

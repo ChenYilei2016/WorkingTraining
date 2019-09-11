@@ -1,12 +1,11 @@
 package cn.chenyilei.work.web.security.filter.jwt;
 
-import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
+import cn.chenyilei.work.web.constant.WebSecurityProperties;
 import cn.chenyilei.work.web.security.filter.FilterConfiguration;
 import cn.chenyilei.work.web.security.processor.AuthenticationFilterProcessorContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -1,10 +1,8 @@
 package cn.chenyilei.work.web.security.exception;
 
 import cn.chenyilei.work.domain.vo.AjaxResult;
-import cn.chenyilei.work.utils.MapperUtils;
-import cn.chenyilei.work.utils.MvcUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cn.chenyilei.work.commonutils.MapperUtils;
+import cn.chenyilei.work.commonutils.MvcUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -12,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * 有人无凭据就想访问受保护的资源时，用这个处理
@@ -29,7 +26,7 @@ public class AuthenticationFailEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException e) throws IOException, ServletException {
 
         MvcUtils.setAjaxResponse(response);
-        AjaxResult error = AjaxResult.error("你需要先进行登陆!");
+        AjaxResult error = AjaxResult.error(e.getMessage());
         response.getWriter().print(MapperUtils.obj2json(error));
         response.flushBuffer();
     }

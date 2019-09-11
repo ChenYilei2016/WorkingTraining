@@ -1,6 +1,6 @@
-package cn.chenyilei.work.web.security.constant;
+package cn.chenyilei.work.web.constant;
 
-import cn.chenyilei.work.web.security.constant.internal.SslProperties;
+import cn.chenyilei.work.web.constant.internal.SslProperties;
 import cn.chenyilei.work.web.security.filter.AuthenticationType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

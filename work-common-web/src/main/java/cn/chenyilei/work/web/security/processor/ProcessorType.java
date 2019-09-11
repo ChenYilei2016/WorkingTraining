@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 public enum ProcessorType {
     //微信类型验证
     wx,
-
+    form,
     ;
     public static boolean isProcessorType(String url){
         ProcessorType type = null;

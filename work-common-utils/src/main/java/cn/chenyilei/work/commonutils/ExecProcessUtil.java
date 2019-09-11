@@ -1,9 +1,7 @@
-package cn.chenyilei.work.utils;
+package cn.chenyilei.work.commonutils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *  防止缓冲区满了后不能及时得到信息

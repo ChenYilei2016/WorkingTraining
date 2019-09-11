@@ -33,7 +33,7 @@ public class AuthenticationFilterProcessorContextHolder {
 
     public AuthenticationFilterProcessor findFilterProcessorByUrl(String url)  {
         if(!ProcessorType.isProcessorType(url)){
-            throw new UnapprovedClientAuthenticationException("错误的Url");
+            throw new UnapprovedClientAuthenticationException("错误的Url,找不到对应的执行器!");
         }
         ProcessorType type = ProcessorType.toProcessorType(url);
         return getProcessor(type.name() + AuthenticationFilterProcessor.class.getSimpleName());
