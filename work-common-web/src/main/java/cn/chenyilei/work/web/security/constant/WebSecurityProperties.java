@@ -4,6 +4,7 @@ import cn.chenyilei.work.web.security.constant.internal.SslProperties;
 import cn.chenyilei.work.web.security.filter.FilterType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * 安全相关常量
@@ -23,6 +24,7 @@ public class WebSecurityProperties {
     private boolean permitAllWhenNoFilter = true;
     private String tokenHeader = "Authorization";
 
+    @NestedConfigurationProperty
     private SslProperties ssl = new SslProperties();
 
 

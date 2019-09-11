@@ -46,7 +46,7 @@ cyl:
   enabled-swagger: true #启用swagger文档
   login-path: /authentication/login
   login-page: /index.html
-  login-type: normal #  登陆方式 normal 或 jwt形式,可扩展
+  login-type: jwt  #登陆方式 normal 或 jwt形式,可扩展
   ssl:
     enabled-ssl: false
     keyStore: 'C:\\Users\\Administrator\\Desktop\\School\\WorkingTraining\\work-web-admin\\src\\main\\resources\\resources\\chenyilei.jks'
@@ -54,6 +54,9 @@ cyl:
     keyStoreType: JKS
   permit-all-when-no-filter: true  #没有拦截器的时候,不保护任何地址
   token-header: Authorization
+  jwt:
+    keySecret: 'www.chenyilei.cn'
+    ttl: 86400000
 
 #logging:
 #  path: C:\\Users\\Administrator\\Desktop\\  #日志打印位置

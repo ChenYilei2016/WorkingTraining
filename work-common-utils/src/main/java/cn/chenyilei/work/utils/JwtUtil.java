@@ -5,8 +5,17 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -22,12 +31,18 @@ import java.util.*;
  </dependency>
  * Created by Administrator on 2018/4/11.
  */
-public class JwtUtil {
+@Component
+public class JwtUtil implements InitializingBean, EnvironmentAware {
 
-    //加密密钥
+    /**
+     * 默认加密密钥
+     * @see {@link application.yml  cyl.jwt.keySecret}
+     */
     private static byte[] KEYSECRET = "www.chenyilei.cn".getBytes();
     //凭证过期时长
     private static long ttl = 24*3600*1000 ;//以毫秒为单位
+
+    private Environment environment;
 
     /**
      * 生成JWT
@@ -56,6 +71,7 @@ public class JwtUtil {
         AuthenticationUser authenticationUser = new AuthenticationUser();
         authenticationUser.setUserId(Long.valueOf(body.get("userId").toString()));
         authenticationUser.setUsername(body.get("username").toString());
+
         //解析authorities
         List<LinkedHashMap<String, String>> authorities = (List<LinkedHashMap<String, String>>) body.get("authorities");
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
@@ -76,20 +92,15 @@ public class JwtUtil {
         return body;
     }
 
-    /**
-     * 解析JWT
-     * @param jwtStr
-     * @return
-     */
-//    public static JwtInterceptor.UserInfo parseJWT(String jwtStr){
-//        io.jsonwebtoken.Claims body = Jwts.parser()
-//                .setSigningKey(KEYSECRET)
-//                .parseClaimsJws(jwtStr)
-//                .getBody();
-//        JwtInterceptor.UserInfo userInfo = new JwtInterceptor.UserInfo();
-//        userInfo.setId(body.getId());
-//        userInfo.setUsername(body.getSubject());
-//        userInfo.setAuthorities( (List<String>)body.get("authorities") );
-//        return userInfo;
-//    }
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        JwtUtil.KEYSECRET = this.environment.getProperty("cyl.jwt.keySecret","www.chenyilei.cn").getBytes();
+        JwtUtil.ttl = this.environment.getProperty("cyl.jwt.ttl",long.class,24*3600*1000L);
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
+
 }

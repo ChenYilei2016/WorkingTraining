@@ -2,7 +2,6 @@ package cn.chenyilei.work.web.security.filter.normal;
 
 import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
 import cn.chenyilei.work.web.security.filter.FilterConfiguration;
-import cn.chenyilei.work.web.security.filter.FilterType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,7 +31,7 @@ public class NormalFilterConfiguration implements FilterConfiguration {
     @Override
     public void filterConfig(HttpSecurity httpSecurity) throws Exception{
         log.info("启用normal filter!");
-        NormalAuthenticationFilter normalAuthenticationFilter = new NormalAuthenticationFilter(webSecurityProperties);
+        NormalCreateAuthenticationFilter normalAuthenticationFilter = new NormalCreateAuthenticationFilter(webSecurityProperties);
         normalAuthenticationFilter.setAuthenticationManager(authenticationManager);
         //将认证的 filter 放到 logoutFilter 这个责任链节点之前
         httpSecurity

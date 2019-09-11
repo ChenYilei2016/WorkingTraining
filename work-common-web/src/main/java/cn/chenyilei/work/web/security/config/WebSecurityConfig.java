@@ -43,7 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     WebSecurityProperties webSecurityProperties;
 
-
     @Autowired(required = false)
     List<FilterConfiguration> filterConfigurationList = new ArrayList<>();
 

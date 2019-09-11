@@ -26,6 +26,6 @@ public class TestUserDetailServiceImpl implements UserDetailsService {
     @Override
     public AuthenticationUser loadUserByUsername(String username) throws UsernameNotFoundException {
         //Test 测试Service
-        return new AuthenticationUser(-1L,username,passwordEncoder.encode("root"), AuthorityUtils.createAuthorityList("ROLE_USER"));
+        return new AuthenticationUser(-1L,username,null, AuthorityUtils.createAuthorityList("ROLE_USER"));
     }
 }

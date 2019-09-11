@@ -31,6 +31,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication(scanBasePackages = "cn.chenyilei.work")
 @MapperScan(basePackages = "cn.chenyilei.work.web.mapper")
 public class WebAdminApplication implements CommandLineRunner {
+
     public static void main(String[] args) {
         new SpringApplicationBuilder(WebAdminApplication.class)
                 .run(args);
@@ -40,7 +41,7 @@ public class WebAdminApplication implements CommandLineRunner {
         LoggerFactory.getLogger(WebAdminApplication.class).info("=======启动完成!========");
     }
 
-// https 配置
+//  https 配置
     @Bean
     @ConditionalOnProperty(prefix = "cyl.ssl",name = "enabled-ssl",havingValue = "true",matchIfMissing = false)
     WebServerFactoryCustomizer webServerFactoryCustomizer(WebSecurityProperties webSecurityProperties){

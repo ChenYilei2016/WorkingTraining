@@ -6,11 +6,10 @@ import cn.chenyilei.work.utils.JwtUtil;
 import cn.chenyilei.work.utils.MapperUtils;
 import cn.chenyilei.work.utils.MvcUtils;
 import cn.chenyilei.work.web.security.constant.WebSecurityProperties;
-import cn.chenyilei.work.web.security.filter.normal.NormalAuthenticationFilter;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -25,11 +24,12 @@ import java.io.IOException;
 /**
  * 对于使用jwt方式,验证方式可能区别很大所以弄成了多个过滤器
  *
+ * 可以匹配 /login/** 路径 根据末尾的 sms/imageCode 实现多个业务处理器
+ *
  * @author chenyilei
  * @email 705029004@qq.com
  * @date 2019/09/10 15:44
  */
-
 public class JwtCreateAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     private WebSecurityProperties webSecurityProperties ;
 
@@ -37,8 +37,8 @@ public class JwtCreateAuthenticationFilter extends AbstractAuthenticationProcess
         super(new AntPathRequestMatcher(webSecurityProperties.getLoginPath(), "POST"));
         this.webSecurityProperties = webSecurityProperties;
         nowInit();
-
     }
+
     private void nowInit() {
         this.setAuthenticationSuccessHandler(new SuccessHandler());
         this.setAuthenticationFailureHandler(new FailureHandler());
@@ -48,7 +48,6 @@ public class JwtCreateAuthenticationFilter extends AbstractAuthenticationProcess
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-
 //        //TODO 要有个效验，然后在转换
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -59,9 +58,16 @@ public class JwtCreateAuthenticationFilter extends AbstractAuthenticationProcess
             password = "";
         }
         username = username.trim();
+        /**
+         * 可以直接生成一个token 用其他的验证方式 {@link AuthenticationUser}
+         */
+//        AuthenticationUser authenticationUser = new AuthenticationUser();
+//        authenticationUser.setUserId(122L);
+//        authenticationUser.setUsername("12312312");
+//        authenticationUser.setAuthorities(AuthorityUtils.createAuthorityList("123"));
+//        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(authenticationUser,null,AuthorityUtils.createAuthorityList("123"));
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username,password);
         setDetails(request, authRequest);
-
         return getAuthenticationManager().authenticate(authRequest);
     }
 
