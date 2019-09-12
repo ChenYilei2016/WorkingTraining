@@ -1,8 +1,6 @@
 package cn.chenyilei.work.web.security.processor.browser;
 
-import cn.chenyilei.work.commonutils.MapperUtils;
 import cn.chenyilei.work.web.security.processor.AuthenticationFilterProcessor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * 对于微信的一种登陆业务验证

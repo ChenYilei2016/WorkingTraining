@@ -1,7 +1,7 @@
 package cn.chenyilei.work.web.service.impl;
 
 import cn.chenyilei.work.domain.pojo.TbUser;
-import cn.chenyilei.work.web.mapper.TbUserMapper;
+import cn.chenyilei.work.domain.mapper.TbUserMapper;
 import cn.chenyilei.work.web.service.TbUserService;
 import org.springframework.stereotype.Service;
 

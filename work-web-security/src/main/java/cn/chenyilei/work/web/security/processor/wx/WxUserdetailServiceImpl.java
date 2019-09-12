@@ -1,7 +1,7 @@
 package cn.chenyilei.work.web.security.processor.wx;
 
 import cn.chenyilei.work.domain.pojo.TbUser;
-import cn.chenyilei.work.web.mapper.TbUserMapper;
+import cn.chenyilei.work.domain.mapper.TbUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +26,7 @@ public class WxUserdetailServiceImpl {
         if(selectUser == null){
             //注册
             tbUser.setUsername(openid);
+            //自动带上附赠ID
             int insert = tbUserMapper.insert(tbUser);
             return tbUser;
         }

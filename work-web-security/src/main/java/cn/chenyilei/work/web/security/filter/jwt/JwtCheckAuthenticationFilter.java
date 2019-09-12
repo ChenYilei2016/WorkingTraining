@@ -2,7 +2,7 @@ package cn.chenyilei.work.web.security.filter.jwt;
 
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.commonutils.JwtUtil;
-import cn.chenyilei.work.web.constant.WebSecurityProperties;
+import cn.chenyilei.work.web.security.properties.WebSecurityProperties;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;

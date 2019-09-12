@@ -15,8 +15,6 @@ public class ProcessorTypeTest {
 
     @Test
     public void s() {
-        System.out.println(ProcessorType.toProcessorType("dafdas/wx"));
-        System.out.println(AuthenticationFilterProcessor.class.getSimpleName());
 
     }
 }

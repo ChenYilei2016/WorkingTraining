@@ -17,6 +17,11 @@
             <artifactId>work-common-web</artifactId>
             <version>${parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.chenyilei</groupId>
+            <artifactId>work-web-security</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>

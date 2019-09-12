@@ -9,24 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>work-common-domain</artifactId>
+    <artifactId>work-web-security</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>cn.chenyilei</groupId>
-            <artifactId>work-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper-spring-boot-starter</artifactId>
-            <optional>true</optional>
+            <groupId>cn.chenyilei</groupId>
+            <artifactId>work-common-web</artifactId>
+            <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

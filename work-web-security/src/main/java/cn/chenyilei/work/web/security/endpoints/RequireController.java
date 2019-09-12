@@ -4,7 +4,7 @@ import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.domain.vo.AjaxResult;
 import cn.chenyilei.work.commonutils.CookieUtil;
 import cn.chenyilei.work.commonutils.MvcUtils;
-import cn.chenyilei.work.web.constant.WebSecurityProperties;
+import cn.chenyilei.work.web.security.properties.WebSecurityProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

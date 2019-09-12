@@ -1,10 +1,12 @@
 package cn.chenyilei.work.domain.security;
 
+import cn.chenyilei.work.domain.pojo.TbUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -73,5 +75,14 @@ public class AuthenticationUser implements UserDetails {
         return true;
     }
 
+    public static AuthenticationUser fromTbUser(TbUser tbUser){
+        AuthenticationUser authenticationUser = new AuthenticationUser();
+        authenticationUser.setUserId(tbUser.getId());
+        authenticationUser.setPassword(tbUser.getPassword());
+        authenticationUser.setUsername(tbUser.getUsername());
+        authenticationUser.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList(tbUser.getAuthorities()));
+
+        return authenticationUser;
+    }
 
 }

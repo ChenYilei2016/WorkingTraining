@@ -1,6 +1,6 @@
 package cn.chenyilei.work.web;
 
-import cn.chenyilei.work.web.constant.WebSecurityProperties;
+import cn.chenyilei.work.web.constant.SslProperties;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,22 +30,22 @@ public class WebAdminApplication implements CommandLineRunner {
     }
     @Override
     public void run(String... args) throws Exception {
-        LoggerFactory.getLogger(WebAdminApplication.class).info("=======启动完成!========");
+        LoggerFactory.getLogger(WebAdminApplication.class).info("=======启动完成!=======");
     }
 
 //  https 配置
     @Bean
     @ConditionalOnProperty(prefix = "cyl.ssl",name = "enabled-ssl",havingValue = "true",matchIfMissing = false)
-    WebServerFactoryCustomizer webServerFactoryCustomizer(WebSecurityProperties webSecurityProperties){
+    WebServerFactoryCustomizer webServerFactoryCustomizer(SslProperties sslProperties){
         return new WebServerFactoryCustomizer() {
             @Override
             public void customize(WebServerFactory factory) {
                 if( factory instanceof TomcatServletWebServerFactory ){
                     TomcatServletWebServerFactory tomcatServletWebServerFactory = (TomcatServletWebServerFactory) factory;
                     Ssl ssl = new Ssl();
-                    ssl.setKeyStore(webSecurityProperties.getSsl().getKeyStore());
-                    ssl.setKeyPassword(webSecurityProperties.getSsl().getKeyPassword());
-                    ssl.setKeyStoreType(webSecurityProperties.getSsl().getKeyStoreType());
+                    ssl.setKeyStore(sslProperties.getKeyStore());
+                    ssl.setKeyPassword(sslProperties.getKeyPassword());
+                    ssl.setKeyStoreType(sslProperties.getKeyStoreType());
                     tomcatServletWebServerFactory.setSsl(ssl);
                 }else{
                     throw new RuntimeException("没有适合的web容器能够使用SSL证书!");

@@ -1,6 +1,6 @@
 package cn.chenyilei.work.web.security.filter.jwt;
 
-import cn.chenyilei.work.web.constant.WebSecurityProperties;
+import cn.chenyilei.work.web.security.properties.WebSecurityProperties;
 import cn.chenyilei.work.web.security.filter.FilterConfiguration;
 import cn.chenyilei.work.web.security.processor.AuthenticationFilterProcessorContextHolder;
 import lombok.extern.slf4j.Slf4j;

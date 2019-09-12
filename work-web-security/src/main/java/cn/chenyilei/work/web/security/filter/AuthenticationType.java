@@ -2,7 +2,6 @@ package cn.chenyilei.work.web.security.filter;
 
 import cn.chenyilei.work.web.security.filter.jwt.JwtFilterConfiguration;
 import cn.chenyilei.work.web.security.filter.normal.NormalFilterConfiguration;
-import lombok.Getter;
 
 /**
  * 使用的验证过滤器配置

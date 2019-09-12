@@ -12,7 +12,6 @@ import org.springframework.security.authentication.InternalAuthenticationService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -51,16 +50,11 @@ public class WxAuthenticationFilterProcessor implements AuthenticationFilterProc
             String code = requestBodyMap.get("code").toString();
             String openid = WxSmallProgramUtils.getOpenIdFromCode(code);
 
-            //TODO: 使更加优雅
             //进行账号的登陆或者注册
             TbUser tbUser = wxUserdetailService.login(openid);
-            AuthenticationUser user = new AuthenticationUser(
-                     tbUser.getId()
-                    ,openid
-                    ,null
-                    ,AuthorityUtils.commaSeparatedStringToAuthorityList(tbUser.getAuthorities()));
+            AuthenticationUser user = AuthenticationUser.fromTbUser(tbUser);
 
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null,null);
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
             token.setDetails(webAuthenticationDetailsSource.buildDetails(request));
 
             return token;

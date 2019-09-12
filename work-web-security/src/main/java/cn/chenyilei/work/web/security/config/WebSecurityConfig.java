@@ -1,7 +1,7 @@
 package cn.chenyilei.work.web.security.config;
 
 
-import cn.chenyilei.work.web.constant.WebSecurityProperties;
+import cn.chenyilei.work.web.security.properties.WebSecurityProperties;
 import cn.chenyilei.work.web.security.exception.AuthenticationAccessDeniedHandler;
 import cn.chenyilei.work.web.security.exception.AuthenticationFailEntryPoint;
 import cn.chenyilei.work.web.security.filter.FilterConfiguration;

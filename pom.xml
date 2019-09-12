@@ -9,6 +9,7 @@
         <module>work-common</module>
         <module>work-web-admin</module>
         <module>work-common-web</module>
+        <module>work-web-security</module>
     </modules>
 
     <parent>
