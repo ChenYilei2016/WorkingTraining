@@ -21,7 +21,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @date 2019/09/05 14:08
  */
 @SpringBootApplication(scanBasePackages = "cn.chenyilei.work")
-@MapperScan(basePackages = "cn.chenyilei.work.web.mapper")
+@MapperScan(basePackages = {"cn.chenyilei.work.domain.mapper","cn.chenyilei.work.web.mapper"})
 public class WebAdminApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
