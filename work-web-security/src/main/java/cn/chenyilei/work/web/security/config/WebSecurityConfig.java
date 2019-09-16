@@ -19,6 +19,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.util.AntPathMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired(required = false)
     List<FilterConfiguration> filterConfigurationList = new ArrayList<>();
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
@@ -57,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(
                         "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**",
-                        "/code/**",
+                        "/code/**","/**/*.ico",
                         "/authentication/require",
                         webSecurityProperties.getLoginPath(),webSecurityProperties.getLoginPage(),
 
@@ -78,6 +81,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         //自定义过滤器设置
         diyFilterConfiguration(http);
+        //进行url的RBAC权限控制
+        http.authorizeRequests()
+                .anyRequest()
+                .access("@rbacService.hasPermission(request,authentication)");
     }
 
     private void diyFilterConfiguration(HttpSecurity http) throws Exception {

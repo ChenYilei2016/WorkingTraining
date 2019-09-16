@@ -32,7 +32,7 @@ public class JwtUtil implements InitializingBean, EnvironmentAware {
 
     /**
      * 默认加密密钥
-     * application.yml  cyl.jwt.keySecret
+     * application.yml  cyl.security.jwt.keySecret
      */
     private static byte[] KEYSECRET = "www.chenyilei.cn".getBytes();
     //凭证过期时长
@@ -92,8 +92,8 @@ public class JwtUtil implements InitializingBean, EnvironmentAware {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        JwtUtil.KEYSECRET = this.environment.getProperty("cyl.jwt.keySecret","www.chenyilei.cn").getBytes();
-        JwtUtil.ttl = this.environment.getProperty("cyl.jwt.ttl",long.class,24*3600*1000L);
+        JwtUtil.KEYSECRET = this.environment.getProperty("cyl.security.jwt.keySecret","www.chenyilei.cn").getBytes();
+        JwtUtil.ttl = this.environment.getProperty("cyl.security.jwt.ttl",long.class,24*3600*1000L);
     }
 
     @Override

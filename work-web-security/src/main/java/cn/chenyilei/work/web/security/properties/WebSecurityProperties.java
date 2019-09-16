@@ -12,9 +12,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date 2019/09/09 13:46
  */
 @Data
-@ConfigurationProperties(prefix = "cyl")
+@ConfigurationProperties(prefix = "cyl.security")
 public class WebSecurityProperties {
-    private boolean enabledSwagger ;
+    private boolean enabledSwagger = true ;
     private String loginPage = "/index.html"; //默认登陆页面
     private String loginPath = "/authentication/login/*";
     //认证类型

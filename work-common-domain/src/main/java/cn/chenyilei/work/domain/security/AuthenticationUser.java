@@ -1,6 +1,9 @@
 package cn.chenyilei.work.domain.security;
 
 import cn.chenyilei.work.domain.pojo.TbUser;
+import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.RuntimeUtil;
+import cn.hutool.system.SystemUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -81,7 +84,6 @@ public class AuthenticationUser implements UserDetails {
         authenticationUser.setPassword(tbUser.getPassword());
         authenticationUser.setUsername(tbUser.getUsername());
         authenticationUser.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList(tbUser.getAuthorities()));
-
         return authenticationUser;
     }
 

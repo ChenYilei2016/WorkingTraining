@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
  */
 @Slf4j
 @Configuration
-@ConditionalOnProperty(prefix = "cyl",name ="authentication-type",havingValue = "normal",matchIfMissing = false)
+@ConditionalOnProperty(prefix = "cyl.security",name ="authentication-type",havingValue = "normal",matchIfMissing = false)
 public class NormalFilterConfiguration implements FilterConfiguration {
 
     @Autowired

@@ -41,17 +41,17 @@ public class WxUserdetailServiceImplTest {
     @Test
     public void login() {
         String openid = "123";
-        TbUser tbUser = jdbcTemplate.queryForObject(
-                "select * from tb_user where wxopenid = ?",
-                new Object[]{openid},
-                new BeanPropertyRowMapper<TbUser>(TbUser.class)
-        );
-
-        if(null == tbUser){
-            tbUser.setUsername(openid);
-            tbUser.setWxopenid(openid);
+//        TbUser tbUser = jdbcTemplate.queryForObject(
+//                "select * from tb_user where wxopenid = ?",
+//                new Object[]{openid},
+//                new BeanPropertyRowMapper<TbUser>(TbUser.class)
+//        );
+//
+//        if(null == tbUser){
+//            tbUser.setUsername(openid);
+//            tbUser.setWxopenid(openid);
             jdbcTemplate.update("insert into tb_user (username,wxopenid) values (?,?)",openid,openid);
-        }
+//        }
 
     }
 }

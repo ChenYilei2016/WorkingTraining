@@ -3,6 +3,7 @@ package cn.chenyilei.work.web.security.exception;
 import cn.chenyilei.work.domain.vo.AjaxResult;
 import cn.chenyilei.work.commonutils.MapperUtils;
 import cn.chenyilei.work.commonutils.MvcUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -18,13 +19,14 @@ import java.io.IOException;
  * @author pyb
  * @date 2019/08/31
  */
+@Slf4j
 public class AuthenticationFailEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException e) throws IOException, ServletException {
-
+        log.error("AuthenticationFailEntryPoint");
         MvcUtils.setAjaxResponse(response);
         AjaxResult error = AjaxResult.error(e.getMessage());
         response.getWriter().print(MapperUtils.obj2json(error));

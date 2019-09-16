@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
  */
 @Slf4j
 @Configuration
-@ConditionalOnProperty(prefix = "cyl",name ="authentication-type",havingValue = "jwt",matchIfMissing = false)
+@ConditionalOnProperty(prefix = "cyl.security",name ="authentication-type",havingValue = "jwt",matchIfMissing = false)
 public class JwtFilterConfiguration implements FilterConfiguration {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -49,5 +49,6 @@ public class JwtFilterConfiguration implements FilterConfiguration {
         //获取用户信息过滤器
         JwtCheckAuthenticationFilter jwtCheckAuthenticationFilter = new JwtCheckAuthenticationFilter(webSecurityProperties);
         http.addFilterAfter(jwtCheckAuthenticationFilter,LogoutFilter.class);
+
     }
 }

@@ -41,7 +41,7 @@ public class AuthenticationFilterProcessorContextHolder {
         return findFilterProcessorByUrl( request.getRequestURI() );
     }
 
-    public AuthenticationFilterProcessor findFilterProcessorByRequest(ProcessorType type) {
+    public AuthenticationFilterProcessor findFilterProcessorByProcessorType(ProcessorType type) {
         return getProcessor(type.name() + AuthenticationFilterProcessor.class.getSimpleName());
     }
 }

@@ -1,4 +1,4 @@
-package cn.chenyilei.work.web.constant;
+package cn.chenyilei.work.web.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

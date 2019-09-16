@@ -1,6 +1,7 @@
 package cn.chenyilei.work.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2019/09/09 16:02
  */
 @Configuration
+@ConditionalOnProperty(prefix = "aaa",name = "aa",havingValue = "1")
 public class MvcGlobalConfigure implements WebMvcConfigurer {
 
     private class CharsetCodeInterceptor extends HandlerInterceptorAdapter{

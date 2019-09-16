@@ -1,6 +1,11 @@
 package cn.chenyilei.work.web;
 
-import cn.chenyilei.work.web.constant.SslProperties;
+import cn.chenyilei.work.commonutils.ZipUtils;
+import cn.chenyilei.work.web.properties.SslProperties;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.core.util.URLUtil;
+import cn.hutool.core.util.ZipUtil;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,13 +25,19 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @email 705029004@qq.com
  * @date 2019/09/05 14:08
  */
-@SpringBootApplication(scanBasePackages = "cn.chenyilei.work")
-@MapperScan(basePackages = {"cn.chenyilei.work.domain.mapper","cn.chenyilei.work.web.mapper"})
+@SpringBootApplication(scanBasePackages = {
+        "cn.chenyilei.work"
+})
+@MapperScan(basePackages = {
+        "cn.chenyilei.work.domain.mapper",
+        "cn.chenyilei.work.web.mapper"
+})
 public class WebAdminApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(WebAdminApplication.class)
                 .run(args);
+
     }
     @Override
     public void run(String... args) throws Exception {
