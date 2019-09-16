@@ -20,6 +20,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * 服务启动类
+ * @see cn.chenyilei.work.web.security.config.WebSecurityConfig 安全模块
  *
  * @author chenyilei
  * @email 705029004@qq.com
