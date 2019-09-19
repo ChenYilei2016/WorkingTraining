@@ -1,5 +1,6 @@
 package cn.chenyilei.work.web.security.endpoints;
 
+import cn.chenyilei.work.domain.constant.CodeResultEnum;
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.domain.vo.AjaxResult;
 import cn.chenyilei.work.commonutils.CookieUtil;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,7 +41,20 @@ public class RequireController {
 
     @RequestMapping("/data")
     @ResponseBody
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public Object data3(@AuthenticationPrincipal AuthenticationUser user,
+                        Authentication authentication,
+                        HttpServletRequest request,
+                        HttpServletResponse response) throws IOException {
+        String data = "authentication:"+authentication+"\n " +
+                "user: "+user+ "\n"+
+                "Url:"+request.getRequestURL()+"\n " +
+                "Uri:"+request.getRequestURI()+"\n";
+        return AjaxResult.success(data,"一次成功的请求!");
+    }
+
+    @RequestMapping("/data2")
+    @ResponseBody
+    @PreAuthorize("hasAuthority('CUSTOMER')")
     public Object data(@AuthenticationPrincipal AuthenticationUser user,
                         Authentication authentication,
                        HttpServletRequest request,
@@ -50,6 +65,23 @@ public class RequireController {
                 "Uri:"+request.getRequestURI()+"\n";
         return AjaxResult.success(data,"一次成功的请求!");
     }
+
+    @RequestMapping("/data3")
+    @ResponseBody
+    @PreAuthorize("hasAuthority('ALL')")
+    public Object data2(@AuthenticationPrincipal AuthenticationUser user,
+                       Authentication authentication,
+                       HttpServletRequest request,
+                       HttpServletResponse response) throws IOException {
+        String data = "authentication:"+authentication+"\n " +
+                "user: "+user+ "\n"+
+                "Url:"+request.getRequestURL()+"\n " +
+                "Uri:"+request.getRequestURI()+"\n";
+        return AjaxResult.success(data,"一次成功的请求!");
+    }
+
+
+
 
     //没有登录的信息返回
     @RequestMapping("/authentication/require")

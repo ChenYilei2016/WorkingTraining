@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 注释
+ * Ajax分页返回类
  *
  * @author chenyilei
  * @email 705029004@qq.com

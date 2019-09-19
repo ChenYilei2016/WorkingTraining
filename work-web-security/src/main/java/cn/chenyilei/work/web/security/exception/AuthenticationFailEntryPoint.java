@@ -1,9 +1,11 @@
 package cn.chenyilei.work.web.security.exception;
 
+import cn.chenyilei.work.domain.constant.CodeResultEnum;
 import cn.chenyilei.work.domain.vo.AjaxResult;
 import cn.chenyilei.work.commonutils.MapperUtils;
 import cn.chenyilei.work.commonutils.MvcUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -27,9 +29,13 @@ public class AuthenticationFailEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException e) throws IOException, ServletException {
         log.error("AuthenticationFailEntryPoint");
+
+        CodeResultEnum unauthorized = CodeResultEnum.UNAUTHORIZED;
         MvcUtils.setAjaxResponse(response);
-        AjaxResult error = AjaxResult.error(e.getMessage());
+        AjaxResult error = AjaxResult.error(e.getMessage(), unauthorized);
+        response.setStatus(unauthorized.getCode());
         response.getWriter().print(MapperUtils.obj2json(error));
         response.flushBuffer();
+
     }
 }

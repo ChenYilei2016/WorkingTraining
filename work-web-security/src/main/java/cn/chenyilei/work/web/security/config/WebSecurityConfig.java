@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -69,9 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
         ;
 
-        //拦截其余Url
-        http.authorizeRequests().anyRequest().authenticated();
-
 //      AuthenticationEntryPoint 用来解决匿名用户访问无权限资源时的异常
 //      AccessDeineHandler       用来解决认证过的用户访问无权限资源时的异常
         http.exceptionHandling()
@@ -79,12 +77,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(new AuthenticationAccessDeniedHandler())
         ;
 
+
+//        进行url的RBAC权限控制
+//        http.authorizeRequests()
+//                .anyRequest()
+//                .access("@rbacService.hasPermission(request,authentication)");
+
         //自定义过滤器设置
         diyFilterConfiguration(http);
-        //进行url的RBAC权限控制
-        http.authorizeRequests()
-                .anyRequest()
-                .access("@rbacService.hasPermission(request,authentication)");
+
+        //拦截其余Url
+        http.authorizeRequests().anyRequest().authenticated();
+
     }
 
     private void diyFilterConfiguration(HttpSecurity http) throws Exception {
@@ -96,6 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             http.authorizeRequests().anyRequest().permitAll();
         }
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 
 <generatorConfiguration>
     <!-- 引入数据库连接配置 -->
@@ -22,13 +22,14 @@
                 connectionURL="${jdbc.connectionURL}"
                 userId="${jdbc.username}"
                 password="${jdbc.password}">
+            <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
         <!-- 配置实体类存放路径 -->
         <javaModelGenerator targetPackage="cn.chenyilei.work.domain.pojo" targetProject="src/main/java"/>
 
         <!-- 配置 XML 存放路径 -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources/mapper"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
 
         <!-- 配置 DAO 存放路径 -->
         <javaClientGenerator
@@ -37,10 +38,11 @@
                 type="XMLMAPPER"/>
 
         <!-- 配置需要生成的表，% 代表所有 -->
-        <table tableName="stu">
+        <table tableName="tb_user%">
             <!-- mysql 配置  -->
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
         </table>
+
 
     </context>
 </generatorConfiguration>

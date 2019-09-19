@@ -1,5 +1,6 @@
 server:
-  port: 8080
+  port: 9090 #远程使用
+#  port: 8081 #本地测试
   servlet:
     session:
       timeout: 1800000 # 30分钟过期session
@@ -37,7 +38,7 @@ spring:
 #    store-type: redis
 
 mybatis:
-  mapper-locations: classpath:/mapper/*.xml
+  mapper-locations: classpath*:/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
 
@@ -58,5 +59,9 @@ cyl:
     keyStore: 'C:\\Users\\Administrator\\Desktop\\School\\WorkingTraining\\work-web-admin\\src\\main\\resources\\resources\\chenyilei.jks'
     keyPassword: 1230
     keyStoreType: JKS
+  system:
+    upload-img-dir-perfix: C:/Users/Administrator/Desktop/School/WorkingTraining/images/
+    visit-img-dir-perfix: https://chenyilei.mynatapp.cc/images/
+
 #logging:
 #  path: C:\\Users\\Administrator\\Desktop\\  #日志打印位置

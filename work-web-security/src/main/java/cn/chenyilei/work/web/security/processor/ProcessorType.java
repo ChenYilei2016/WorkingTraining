@@ -1,5 +1,6 @@
 package cn.chenyilei.work.web.security.processor;
 
+import cn.hutool.core.collection.CollectionUtil;
 import org.apache.commons.lang3.StringUtils;
 
 /**

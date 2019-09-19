@@ -19,6 +19,6 @@ public interface RbacService {
      * @param authentication
      * @return
      */
-	boolean hasPermission(HttpServletRequest request, Authentication authentication);
+	boolean hasPermission(HttpServletRequest request, Authentication authentication) throws Exception;
 
 }

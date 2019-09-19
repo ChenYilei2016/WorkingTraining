@@ -1,6 +1,5 @@
 package cn.chenyilei.work.web.mapper;
 
-import cn.chenyilei.work.domain.mapper.TbUserMapper;
 import cn.chenyilei.work.domain.pojo.TbUser;
 import tk.mybatis.mapper.common.Mapper;
 

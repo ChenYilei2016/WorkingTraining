@@ -30,6 +30,9 @@ public class WxSmallProgramUtils {
         if(resultMap.containsKey("openid")){
             return resultMap.get("openid").toString();
         }
+        if(null == resultMap.get("errmsg")){
+            throw new UnapprovedClientAuthenticationException("微信服务器连接失败!");
+        }
         throw new UnapprovedClientAuthenticationException(resultMap.get("errmsg").toString());
     }
 

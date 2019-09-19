@@ -3,7 +3,7 @@ package cn.chenyilei.work.domain.constant;
 import lombok.Data;
 
 /**
- * 注释
+ * 微信静态信息
  *
  * @author chenyilei
  * @email 705029004@qq.com

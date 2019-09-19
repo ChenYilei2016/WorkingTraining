@@ -6,16 +6,22 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.core.util.ZipUtil;
+import cn.hutool.extra.ssh.JschUtil;
+import cn.hutool.extra.template.TemplateUtil;
+import cn.hutool.poi.excel.ExcelPicUtil;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.embedded.undertow.UndertowServletWebServer;
 import org.springframework.boot.web.server.Ssl;
 import org.springframework.boot.web.server.WebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.AntPathMatcher;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -38,7 +44,6 @@ public class WebAdminApplication implements CommandLineRunner {
     public static void main(String[] args) {
         new SpringApplicationBuilder(WebAdminApplication.class)
                 .run(args);
-
     }
     @Override
     public void run(String... args) throws Exception {
@@ -52,16 +57,21 @@ public class WebAdminApplication implements CommandLineRunner {
         return new WebServerFactoryCustomizer() {
             @Override
             public void customize(WebServerFactory factory) {
+                Ssl ssl = new Ssl();
+                ssl.setKeyStore(sslProperties.getKeyStore());
+                ssl.setKeyPassword(sslProperties.getKeyPassword());
+                ssl.setKeyStoreType(sslProperties.getKeyStoreType());
+
                 if( factory instanceof TomcatServletWebServerFactory ){
                     TomcatServletWebServerFactory tomcatServletWebServerFactory = (TomcatServletWebServerFactory) factory;
-                    Ssl ssl = new Ssl();
-                    ssl.setKeyStore(sslProperties.getKeyStore());
-                    ssl.setKeyPassword(sslProperties.getKeyPassword());
-                    ssl.setKeyStoreType(sslProperties.getKeyStoreType());
                     tomcatServletWebServerFactory.setSsl(ssl);
+                }else if(factory instanceof JettyServletWebServerFactory){
+                    JettyServletWebServerFactory jettyServletWebServerFactory = (JettyServletWebServerFactory) factory;
+                    jettyServletWebServerFactory.setSsl(ssl);
                 }else{
                     throw new RuntimeException("没有适合的web容器能够使用SSL证书!");
                 }
+
             }
         };
     }

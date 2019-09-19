@@ -34,7 +34,7 @@ public class WxAuthenticationFilterProcessor implements AuthenticationFilterProc
     private WebAuthenticationDetailsSource webAuthenticationDetailsSource = new WebAuthenticationDetailsSource();
 
     @Autowired
-    WxUserdetailServiceImpl wxUserdetailService;
+    WxUserDetailService wxUserDetailService;
 
     @Override
     public Authentication doAttemptAuthentication(HttpServletRequest request,
@@ -45,14 +45,17 @@ public class WxAuthenticationFilterProcessor implements AuthenticationFilterProc
             String requestBody = IOUtils.toString(request.getInputStream());
             Map<String, Object> requestBodyMap = MapperUtils.json2map(requestBody);
             if(!requestBodyMap.containsKey("code")){
-                throw new UnapprovedClientAuthenticationException("没有code参数");
+                throw new UnapprovedClientAuthenticationException("没有code参数!");
             }
             String code = requestBodyMap.get("code").toString();
             String openid = WxSmallProgramUtils.getOpenIdFromCode(code);
 
-            //进行账号的登陆或者注册
-            TbUser tbUser = wxUserdetailService.login(openid);
+            //进行微信账号的登陆或者注册
+            TbUser tbUser = wxUserDetailService.login(openid);
+            //将本地用户转换成 spring security 用户
             AuthenticationUser user = AuthenticationUser.fromTbUser(tbUser);
+            //设置用户的权限
+            user.setAuthorities(wxUserDetailService.getAuthority(tbUser.getUserId()));
 
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
             token.setDetails(webAuthenticationDetailsSource.buildDetails(request));

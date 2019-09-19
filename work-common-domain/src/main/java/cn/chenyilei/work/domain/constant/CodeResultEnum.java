@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * 注释
+ * 返回值code 枚举
  *
  * @author chenyilei
  * @email 705029004@qq.com
@@ -13,6 +13,7 @@ import lombok.ToString;
 @Getter
 public enum CodeResultEnum {
     SUCCESS(200),
+    BAD_REQUEST(400),
     UNAUTHORIZED(401), // 没有认证
     FORBIDDEN(403), // 权限不够
 

@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //
 @Configuration
 @EnableSwagger2
-@ConditionalOnProperty(prefix = "cyl",name = "enabled-swagger",havingValue = "true")
+@ConditionalOnProperty(prefix = "cyl.security",name = "enabled-swagger",havingValue = "true")
 public class Swagger2Configuration {
     @Bean
     public Docket createRestApi() {
