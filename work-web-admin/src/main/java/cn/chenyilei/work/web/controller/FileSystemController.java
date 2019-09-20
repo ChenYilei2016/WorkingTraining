@@ -37,7 +37,7 @@ public class FileSystemController {
         try {
             visitUrl = fileService.uploadImg(multipartFile);
         } catch (Exception e) {
-            AjaxResult.success(null,"上传图片失败!");
+            return AjaxResult.error("上传图片失败!");
         }
         return AjaxResult.success(visitUrl,"上传图片成功!");
     }

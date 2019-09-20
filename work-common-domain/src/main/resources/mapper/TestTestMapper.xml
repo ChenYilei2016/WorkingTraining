@@ -7,5 +7,10 @@
     -->
     <id column="test_id" jdbcType="INTEGER" property="testId" />
     <result column="test_createtime" jdbcType="TIMESTAMP" property="testCreatetime" />
+    <result column="test_is" jdbcType="BIT" property="testIs" />
+    <result column="test_double" jdbcType="DOUBLE" property="testDouble" />
+    <result column="test_tinyi" jdbcType="TINYINT" property="testTinyi" />
+    <result column="test_number" jdbcType="DECIMAL" property="testNumber" />
+    <result column="test_deci" jdbcType="DECIMAL" property="testDeci" />
   </resultMap>
 </mapper>

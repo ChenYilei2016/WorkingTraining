@@ -1,4 +1,5 @@
 import cn.chenyilei.work.domain.mapper.TbUserMapper;
+import cn.chenyilei.work.domain.pojo.TbPermission;
 import cn.chenyilei.work.domain.pojo.TbUser;
 import cn.chenyilei.work.web.WebAdminApplication;
 import cn.chenyilei.work.web.mapper.TbUserMapperSecurity;
@@ -59,6 +60,7 @@ public class WxUserdetailServiceImplTest {
     }
     @Test
     public void normaluser() {
-        Collection a = new ArrayList();a.add("!2");
+        List<TbPermission> permissionsByUserId = tbUserMapperSecurity.findPermissionsByUserId("1");
+        System.out.println(permissionsByUserId);
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.chenyilei.work.domain.mapper.TbShowMapper">
+  <resultMap id="BaseResultMap" type="cn.chenyilei.work.domain.pojo.TbShow">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="show_id" jdbcType="INTEGER" property="showId" />
+    <result column="show_user_id" jdbcType="INTEGER" property="showUserId" />
+    <result column="show_information" jdbcType="VARCHAR" property="showInformation" />
+    <result column="show_image" jdbcType="VARCHAR" property="showImage" />
+    <result column="show_createtime" jdbcType="TIMESTAMP" property="showCreatetime" />
+    <result column="show_updatetime" jdbcType="TIMESTAMP" property="showUpdatetime" />
+  </resultMap>
+</mapper>

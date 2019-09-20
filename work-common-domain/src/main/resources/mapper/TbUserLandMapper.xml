@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.chenyilei.work.domain.mapper.TbUserLandMapper">
+  <resultMap id="BaseResultMap" type="cn.chenyilei.work.domain.pojo.TbUserLand">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_land_id" jdbcType="INTEGER" property="userLandId" />
+    <result column="user_land_user_id" jdbcType="INTEGER" property="userLandUserId" />
+    <result column="user_land_land_id" jdbcType="INTEGER" property="userLandLandId" />
+  </resultMap>
+</mapper>

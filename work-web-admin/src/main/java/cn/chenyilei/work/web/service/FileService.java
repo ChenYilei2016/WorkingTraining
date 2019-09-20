@@ -13,5 +13,5 @@ import java.io.InputStream;
  */
 public interface FileService {
     public String uploadImg(MultipartFile multipartFile) throws Exception;
-    public String uploadImg(InputStream inputStream , String filename) throws Exception;
+    public String uploadImg(byte[] bytes, String filename) throws Exception;
 }

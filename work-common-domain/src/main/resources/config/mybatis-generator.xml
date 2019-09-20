@@ -38,11 +38,25 @@
                 type="XMLMAPPER"/>
 
         <!-- 配置需要生成的表，% 代表所有 -->
-        <table tableName="tb_user%">
+        <table tableName="test_test%">
             <!-- mysql 配置  -->
-            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
+<!--            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>-->
         </table>
-
+<!--        <table tableName="tb_activities%">-->
+<!--            <generatedKey column="activities_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tb_land%">-->
+<!--            <generatedKey column="land_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tb_planting%">-->
+<!--            <generatedKey column="planting_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tb_show%">-->
+<!--            <generatedKey column="show_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tb_user_land%">-->
+<!--            <generatedKey column="user_land_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
 
     </context>
 </generatorConfiguration>

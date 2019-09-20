@@ -1,6 +1,6 @@
 server:
-  port: 9090 #远程使用
-#  port: 8081 #本地测试
+#  port: 9090 #远程使用
+  port: 8081 #本地测试
   servlet:
     session:
       timeout: 1800000 # 30分钟过期session

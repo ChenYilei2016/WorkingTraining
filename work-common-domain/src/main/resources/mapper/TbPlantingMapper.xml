@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.chenyilei.work.domain.mapper.TbPlantingMapper">
+  <resultMap id="BaseResultMap" type="cn.chenyilei.work.domain.pojo.TbPlanting">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="planting_id" jdbcType="INTEGER" property="plantingId" />
+    <result column="planting_land_id" jdbcType="INTEGER" property="plantingLandId" />
+    <result column="planting_information" jdbcType="VARCHAR" property="plantingInformation" />
+    <result column="planting_image" jdbcType="VARCHAR" property="plantingImage" />
+    <result column="planting_createtime" jdbcType="TIMESTAMP" property="plantingCreatetime" />
+    <result column="planting_updatetime" jdbcType="TIMESTAMP" property="plantingUpdatetime" />
+  </resultMap>
+</mapper>

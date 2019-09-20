@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.chenyilei.work.domain.mapper.TbLandMapper">
+  <resultMap id="BaseResultMap" type="cn.chenyilei.work.domain.pojo.TbLand">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="land_id" jdbcType="INTEGER" property="landId" />
+    <result column="land_user_id" jdbcType="INTEGER" property="landUserId" />
+    <result column="land_status" jdbcType="INTEGER" property="landStatus" />
+    <result column="land_rectangle" jdbcType="VARCHAR" property="landRectangle" />
+    <result column="land_is_rent" jdbcType="BIT" property="landIsRent" />
+    <result column="land_price" jdbcType="DECIMAL" property="landPrice" />
+    <result column="land_createtime" jdbcType="TIMESTAMP" property="landCreatetime" />
+    <result column="land_updatetime" jdbcType="TIMESTAMP" property="landUpdatetime" />
+  </resultMap>
+</mapper>

@@ -1,4 +1,4 @@
-package cn.chenyilei.work.domain.vo.wx;
+package cn.chenyilei.work.domain.dto.wx;
 
 import lombok.Data;
 

@@ -44,4 +44,9 @@ public class LocationUtil {
         return restTemplate.getForObject(format,GaoDeLocation.class);
     }
 
+    public static void main(String[] args) {
+        System.out.println(getLocationByIP("106.12.74.218"));
+
+    }
+
 }

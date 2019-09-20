@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class SecurityUtils {
 
-    public static <T extends UserDetails> T getSecurityUser(Class<T> clazz){
+    public static <T extends UserDetails> T getSecurityContextPrincipal(Class<T> clazz){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if( null == authentication){
             throw new AuthenticationCredentialsNotFoundException("无用户认证信息!");

@@ -2,27 +2,17 @@ package cn.chenyilei.work.web.controller;
 
 import cn.chenyilei.work.commonutils.JwtUtil;
 import cn.chenyilei.work.domain.constant.CodeResultEnum;
-import cn.chenyilei.work.domain.constant.TbRoleEnum;
-import cn.chenyilei.work.domain.pojo.TbUser;
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.domain.vo.AjaxResult;
-import cn.chenyilei.work.domain.vo.wx.WxUserRequestBody;
+import cn.chenyilei.work.domain.dto.wx.WxUserRequestBody;
 import cn.chenyilei.work.security.SecurityUtils;
 import cn.chenyilei.work.web.security.processor.wx.WxUserDetailService;
 import cn.chenyilei.work.web.service.TbUserService;
-import cn.chenyilei.work.web.service.impl.TbUserServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * 对于用户操作的接口
@@ -49,7 +39,7 @@ public class TbUserController{
         if(null == wxUserRequestBody.getUsername()){
             return AjaxResult.error("没有username参数!", CodeResultEnum.BAD_REQUEST);
         }
-        AuthenticationUser securityUser = SecurityUtils.getSecurityUser(AuthenticationUser.class);
+        AuthenticationUser securityUser = SecurityUtils.getSecurityContextPrincipal(AuthenticationUser.class);
         tbUserService.updatename(securityUser.getUserId(),wxUserRequestBody.getUsername());
         return AjaxResult.success(null,"修改成功!");
     }
@@ -65,7 +55,7 @@ public class TbUserController{
         if(null == wxUserRequestBody.getLevel()){
             return AjaxResult.error("没有level参数!", CodeResultEnum.BAD_REQUEST);
         }
-        AuthenticationUser user = SecurityUtils.getSecurityUser(AuthenticationUser.class);
+        AuthenticationUser user = SecurityUtils.getSecurityContextPrincipal(AuthenticationUser.class);
         Integer level = wxUserRequestBody.getLevel();
         tbUserService.bindingUser(user.getUserId(),level);
         user.setAuthorities(wxUserDetailService.getAuthority(user.getUserId()));
