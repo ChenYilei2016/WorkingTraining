@@ -1,4 +1,4 @@
-package cn.chenyilei.work.domain.pojo;
+package cn.chenyilei.work.domain.pojo.user;
 
 import javax.persistence.*;
 

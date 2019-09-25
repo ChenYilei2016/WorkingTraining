@@ -3,7 +3,7 @@
 <mapper namespace="cn.chenyilei.work.web.mapper.TbUserMapperSecurity">
 
 <!--    -->
-    <select id="findPermissionsByUserId" resultType="cn.chenyilei.work.domain.pojo.TbPermission">
+    <select id="findPermissionsByUserId" resultType="cn.chenyilei.work.domain.pojo.user.TbPermission">
         SELECT
             tp.*
         FROM

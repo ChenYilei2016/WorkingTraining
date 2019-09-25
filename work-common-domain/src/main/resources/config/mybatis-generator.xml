@@ -42,21 +42,52 @@
             <!-- mysql 配置  -->
 <!--            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>-->
         </table>
-<!--        <table tableName="tb_activities%">-->
-<!--            <generatedKey column="activities_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        <table tableName="tb_user_detail%">-->
+<!--            &lt;!&ndash; mysql 配置  &ndash;&gt;-->
+<!--                        <generatedKey column="user_detail_id" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="tb_land%">-->
+
+<!--        <table tableName="tb_bind_user_land">-->
+<!--            <generatedKey column="ul_id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="tb_land">-->
 <!--            <generatedKey column="land_id" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="tb_planting%">-->
+
+<!--        <table tableName="tb_planting">-->
 <!--            <generatedKey column="planting_id" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="tb_show%">-->
+
+<!--        <table tableName="tb_show">-->
 <!--            <generatedKey column="show_id" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="tb_user_land%">-->
-<!--            <generatedKey column="user_land_id" sqlStatement="Mysql" identity="true"/>-->
+
+<!--        <table tableName="tb_activities">-->
+<!--            <generatedKey column="activities_id" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
+
+<!--&lt;!&ndash;        土地的购物车和订单&ndash;&gt;-->
+<!--        <table tableName="tb_land_cart">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tb_land_order">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tb_land_order_detail">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--&lt;!&ndash;    活动的购物车和订单&ndash;&gt;-->
+<!--        <table tableName="tb_activities_cart">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tb_activities_order">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="tb_activities_order_detail">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
+
 
     </context>
 </generatorConfiguration>

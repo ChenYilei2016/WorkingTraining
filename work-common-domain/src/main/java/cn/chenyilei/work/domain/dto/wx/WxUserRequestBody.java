@@ -1,5 +1,6 @@
 package cn.chenyilei.work.domain.dto.wx;
 
+import cn.chenyilei.work.domain.pojo.internal_enum.UserLevelEnum;
 import lombok.Data;
 
 /**
@@ -13,7 +14,9 @@ import lombok.Data;
 public class WxUserRequestBody {
     private String userId;
     private String username;
-    private String password;
-    private Integer level ;
+    private UserLevelEnum level ;
+    private String address;
+    private String phone;
+    private String region;
 
 }

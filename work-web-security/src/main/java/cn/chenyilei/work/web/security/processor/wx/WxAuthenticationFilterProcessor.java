@@ -1,7 +1,7 @@
 package cn.chenyilei.work.web.security.processor.wx;
 
 import cn.chenyilei.work.commonutils.MapperUtils;
-import cn.chenyilei.work.domain.pojo.TbUser;
+import cn.chenyilei.work.domain.pojo.user.TbUser;
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.web.security.processor.AuthenticationFilterProcessor;
 import cn.chenyilei.work.wx.WxSmallProgramUtils;

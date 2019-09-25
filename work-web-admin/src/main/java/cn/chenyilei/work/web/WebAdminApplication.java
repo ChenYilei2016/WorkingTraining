@@ -2,6 +2,7 @@ package cn.chenyilei.work.web;
 
 import cn.chenyilei.work.commonutils.ZipUtils;
 import cn.chenyilei.work.web.properties.SslProperties;
+import cn.chenyilei.work.web.security.filter.FilterConfiguration;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.URLUtil;
@@ -21,6 +22,9 @@ import org.springframework.boot.web.server.Ssl;
 import org.springframework.boot.web.server.WebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.util.AntPathMatcher;
 import tk.mybatis.spring.annotation.MapperScan;
 
@@ -49,6 +53,7 @@ public class WebAdminApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         LoggerFactory.getLogger(WebAdminApplication.class).info("=======启动完成!=======");
     }
+
 
 //  https 配置
     @Bean

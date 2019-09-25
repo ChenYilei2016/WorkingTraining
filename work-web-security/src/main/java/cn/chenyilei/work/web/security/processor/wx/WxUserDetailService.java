@@ -1,6 +1,6 @@
 package cn.chenyilei.work.web.security.processor.wx;
 
-import cn.chenyilei.work.domain.pojo.TbUser;
+import cn.chenyilei.work.domain.pojo.user.TbUser;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.List;

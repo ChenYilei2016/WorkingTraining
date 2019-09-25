@@ -18,7 +18,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +43,7 @@ public class RequireController {
 
     @RequestMapping("/data")
     @ResponseBody
-    public Object data3(@AuthenticationPrincipal AuthenticationUser user,
+    public Object data(@AuthenticationPrincipal AuthenticationUser user,
                         Authentication authentication,
                         HttpServletRequest request,
                         HttpServletResponse response) throws IOException {
@@ -55,7 +57,7 @@ public class RequireController {
     @RequestMapping("/data2")
     @ResponseBody
     @PreAuthorize("hasAuthority('CUSTOMER')")
-    public Object data(@AuthenticationPrincipal AuthenticationUser user,
+    public Object data2(@AuthenticationPrincipal AuthenticationUser user,
                         Authentication authentication,
                        HttpServletRequest request,
                        HttpServletResponse response) throws IOException {
@@ -69,7 +71,7 @@ public class RequireController {
     @RequestMapping("/data3")
     @ResponseBody
     @PreAuthorize("hasAuthority('ALL')")
-    public Object data2(@AuthenticationPrincipal AuthenticationUser user,
+    public Object data3(@AuthenticationPrincipal AuthenticationUser user,
                        Authentication authentication,
                        HttpServletRequest request,
                        HttpServletResponse response) throws IOException {

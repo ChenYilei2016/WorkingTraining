@@ -1,6 +1,8 @@
 package cn.chenyilei.work.domain.dto;
 
+import com.github.pagehelper.IPage;
 import lombok.Data;
+import lombok.Setter;
 
 /**
  * 注释
@@ -12,5 +14,6 @@ import lombok.Data;
 @Data
 public class PageRequest {
     private Integer page = 1;
-    private Integer pageSize = 6;
+    private Integer pageSize  = 6;
+
 }

@@ -9,8 +9,11 @@ import cn.chenyilei.work.web.security.service.TestUserDetailServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.OrderUtils;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -21,9 +24,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.header.Header;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.web.filter.CorsFilter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,7 +44,7 @@ import java.util.List;
 @Configuration
 @EnableConfigurationProperties(WebSecurityProperties.class)
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true,jsr250Enabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements EnvironmentAware {
 
     @Autowired
     WebSecurityProperties webSecurityProperties;
@@ -45,11 +52,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired(required = false)
     List<FilterConfiguration> filterConfigurationList = new ArrayList<>();
 
+    private Environment environment ;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.csrf().disable();
-        http.cors().disable();
+        final Header[] headers = new Header[]{
+                //支持所有源的访问
+                new Header("Access-control-Allow-Origin", "*"),
+                //使ajax请求能够取到header中的jwt token信息
+                new Header("Access-Control-Expose-Headers", webSecurityProperties.getTokenHeader())
+        };
+
+        //跨域配置，支持跨域
+        http.cors()
+                .and()   //添加header设置，支持跨域和ajax请求
+                .headers()
+                .addHeaderWriter(new StaticHeadersWriter(Arrays.asList(headers)))
+                .and()
+                //拦截OPTIONS请求，直接返回header
+                .addFilterAfter(new OptionsRequestFilter(), CorsFilter.class);
 
         http.formLogin().disable();
 //                .successHandler(successHandler)
@@ -86,9 +110,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //自定义过滤器设置
         diyFilterConfiguration(http);
 
-        //拦截其余Url
-        http.authorizeRequests().anyRequest().authenticated();
 
+        if(false == webSecurityProperties.isEnabledSecurity()){
+            http.authorizeRequests().anyRequest().permitAll();
+        }else{
+            //拦截其余Url
+            http.authorizeRequests().anyRequest().authenticated();
+        }
     }
 
     private void diyFilterConfiguration(HttpSecurity http) throws Exception {
@@ -126,4 +154,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
 }

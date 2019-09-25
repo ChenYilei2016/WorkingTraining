@@ -16,7 +16,7 @@ public enum CodeResultEnum {
     BAD_REQUEST(400),
     UNAUTHORIZED(401), // 没有认证
     FORBIDDEN(403), // 权限不够
-
+    UNKNOWERROR(99999) //未知错误
     ;
 
     private int code ;

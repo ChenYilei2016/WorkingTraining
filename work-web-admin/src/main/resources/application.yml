@@ -11,7 +11,7 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://chenyilei.test:3306/worktraining?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://chenyilei.test:3306/worktraining?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 8
@@ -45,6 +45,7 @@ mybatis:
 #################  以下为个人自定义特别变量  ###################
 cyl:
   security:
+    enabled-security: false
     enabled-swagger: true     #启用swagger文档
     login-path: /authentication/login/*
     login-page: /index.html
@@ -65,3 +66,15 @@ cyl:
 
 #logging:
 #  path: C:\\Users\\Administrator\\Desktop\\  #日志打印位置
+
+#log4j:
+#  logger:
+#    com:
+#      ibatis: debug
+#      ibatis.common.jdbc.ScriptRunner: debug
+#      ibatis.common.jdbc.SimpleDataSource: debug
+#    java:
+#      sql:
+#        Connection: debug
+#        PreparedStatement: debug
+#        Statement: debug

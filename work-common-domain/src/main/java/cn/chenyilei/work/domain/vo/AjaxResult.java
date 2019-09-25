@@ -38,5 +38,4 @@ public class AjaxResult<T> implements Serializable {
         this.data = data;
         this.msg = msg;
     }
-
 }

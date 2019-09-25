@@ -1,24 +1,17 @@
 import cn.chenyilei.work.domain.mapper.TbUserMapper;
 import cn.chenyilei.work.domain.mapper.TbUserRoleMapper;
-import cn.chenyilei.work.domain.pojo.TbUser;
-import cn.chenyilei.work.domain.pojo.TbUserRole;
+import cn.chenyilei.work.domain.pojo.user.TbUser;
+import cn.chenyilei.work.domain.pojo.user.TbUserRole;
+import cn.chenyilei.work.domain.pojo.internal_enum.UserLevelEnum;
 import cn.chenyilei.work.web.WebAdminApplication;
 import cn.chenyilei.work.web.mapper.TbUserMapperSecurity;
-import cn.chenyilei.work.web.security.processor.wx.WxUserDetailService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * 注释
@@ -44,14 +37,6 @@ public class TbUser操作Test {
     private String userId = "1";
 
     @Test
-    public void test(){
-        TbUser tbUser = new TbUser();
-        tbUser.setUserId("1");
-        tbUser.setLevel(0);
-        tbUserMapper.updateByPrimaryKeySelective(tbUser);
-    }
-
-    @Test
     public void 让账号变成无任何权限(){
         让账号变成无任何权限service();
     }
@@ -61,12 +46,12 @@ public class TbUser操作Test {
     public void 让账号变成管理员权限(){
         TbUser tbUser = new TbUser();
         tbUser.setUserId("1");
-        tbUser.setLevel(1);
+        tbUser.setLevel(UserLevelEnum.ADMIN);
         tbUserMapper.updateByPrimaryKeySelective(tbUser);
 
         TbUserRole tbUserRole = new TbUserRole();
         tbUserRole.setUserId(1);
-        tbUserRole.setRoleId(1);
+        tbUserRole.setRoleId(UserLevelEnum.ADMIN.getRoleId());
         tbUserRoleMapper.insert(tbUserRole);
     }
 
@@ -89,7 +74,7 @@ public class TbUser操作Test {
         tbUserRoleMapper.delete(tbUserRole);
 
         //设置显示标志level = 0
-        tbUser1.setLevel(0);
+        tbUser1.setLevel(UserLevelEnum.NONE);
         tbUserMapper.updateByPrimaryKeySelective(tbUser1);
         System.err.println("!11111111");
     }

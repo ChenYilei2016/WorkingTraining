@@ -1,6 +1,6 @@
 package cn.chenyilei.work.domain.security;
 
-import cn.chenyilei.work.domain.pojo.TbUser;
+import cn.chenyilei.work.domain.pojo.user.TbUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;

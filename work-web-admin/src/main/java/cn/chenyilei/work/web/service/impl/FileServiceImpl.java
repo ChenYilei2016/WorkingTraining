@@ -32,15 +32,18 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public String uploadImg(MultipartFile multipartFile) throws Exception{
-        System.out.println(multipartFile.getName());
-        System.out.println(multipartFile.getOriginalFilename());
-        System.out.println(multipartFile.getSize());
+//        System.out.println(multipartFile.getName());
+//        System.out.println(multipartFile.getOriginalFilename());
+//        System.out.println(multipartFile.getSize());
         return uploadImg(multipartFile.getBytes(),multipartFile.getOriginalFilename());
     }
 
-    //TODO:
     @Override
     public String uploadImg(byte[] bytes, String filename) throws Exception {
+        if(bytes.length <= 1){
+            throw new RuntimeException("上传的图片大小有问题!");
+        }
+
         String suffix = StringUtils.substringAfter(filename, "."); //文件后缀 .jpg  ....
         String fileMd5Name = md5utils.digestHex(bytes); //文件md5名字
         String baseUrl = ""+fileMd5Name.charAt(0)+"/"+fileMd5Name+"."+suffix; //基础路径 : s/filename.jpg 需要判断有无文件夹

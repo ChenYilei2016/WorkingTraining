@@ -1,7 +1,7 @@
 package cn.chenyilei.work.web.mapper;
 
-import cn.chenyilei.work.domain.pojo.TbPermission;
-import cn.chenyilei.work.domain.pojo.TbUser;
+import cn.chenyilei.work.domain.pojo.user.TbPermission;
+import cn.chenyilei.work.domain.pojo.user.TbUser;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 

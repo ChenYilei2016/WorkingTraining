@@ -21,16 +21,19 @@ public class ExceptionAdvice {
     @ExceptionHandler(value = AccessDeniedException.class)
     public AjaxResult toAccessDeniedExceptionClass(Exception e){
         log.error("toAccessDeniedExceptionClass");
+        if(System.getProperty("isDebug") != null){
+            e.printStackTrace();
+        }
         return AjaxResult.error(e.getMessage(), CodeResultEnum.FORBIDDEN);
     }
 
     @ExceptionHandler(value = Exception.class)
     public AjaxResult toExceptionClass(Exception e){
         log.error("toExceptionClass");
-        if(System.getProperty("isDebug")!= null){
+        if(System.getProperty("isDebug") != null){
             e.printStackTrace();
         }
-        return AjaxResult.error(e.getMessage());
+        return AjaxResult.error(e.getMessage(),CodeResultEnum.UNKNOWERROR);
     }
 
 

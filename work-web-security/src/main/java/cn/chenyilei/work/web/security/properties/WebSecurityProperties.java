@@ -15,6 +15,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "cyl.security")
 public class WebSecurityProperties {
     private boolean enabledSwagger = true ;
+    private boolean enabledSecurity = true;
     private String loginPage = "/index.html"; //默认登陆页面
     private String loginPath = "/authentication/login/*";
     //认证类型

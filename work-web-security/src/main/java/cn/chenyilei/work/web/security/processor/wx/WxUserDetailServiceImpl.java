@@ -1,7 +1,7 @@
 package cn.chenyilei.work.web.security.processor.wx;
 
-import cn.chenyilei.work.domain.pojo.TbPermission;
-import cn.chenyilei.work.domain.pojo.TbUser;
+import cn.chenyilei.work.domain.pojo.user.TbPermission;
+import cn.chenyilei.work.domain.pojo.user.TbUser;
 import cn.chenyilei.work.web.mapper.TbUserMapperSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
