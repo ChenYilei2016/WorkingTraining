@@ -21,7 +21,7 @@ import java.util.Random;
  * @email 705029004@qq.com
  * @date 2019/09/19 14:25
  */
-@Api("对于文件操作的接口")
+@Api(tags = "FileSystemController 对于文件操作的接口")
 @RestController
 @RequestMapping("/file")
 public class FileSystemController {

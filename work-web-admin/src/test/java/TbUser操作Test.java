@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -59,7 +60,7 @@ public class TbUser操作Test {
 
 
 
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void 让账号变成无任何权限service(){
         TbUser tbUser = new TbUser();
         tbUser.setWxopenid(wxopenid);

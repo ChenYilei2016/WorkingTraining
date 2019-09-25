@@ -59,21 +59,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements E
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        final Header[] headers = new Header[]{
-                //支持所有源的访问
-                new Header("Access-control-Allow-Origin", "*"),
-                //使ajax请求能够取到header中的jwt token信息
-                new Header("Access-Control-Expose-Headers", webSecurityProperties.getTokenHeader())
-        };
-
-        //跨域配置，支持跨域
-        http.cors()
-                .and()   //添加header设置，支持跨域和ajax请求
-                .headers()
-                .addHeaderWriter(new StaticHeadersWriter(Arrays.asList(headers)))
-                .and()
-                //拦截OPTIONS请求，直接返回header
-                .addFilterAfter(new OptionsRequestFilter(), CorsFilter.class);
+        http.cors().disable();
+//        final Header[] headers = new Header[]{
+//                //支持所有源的访问
+//                new Header("Access-control-Allow-Origin", "*"),
+//                //使ajax请求能够取到header中的jwt token信息
+//                new Header("Access-Control-Expose-Headers", webSecurityProperties.getTokenHeader())
+//        };
+//
+//        //跨域配置，支持跨域
+//        http.cors()
+//                .and()   //添加header设置，支持跨域和ajax请求
+//                .headers()
+//                .addHeaderWriter(new StaticHeadersWriter(Arrays.asList(headers)))
+//                .and()
+//                //拦截OPTIONS请求，直接返回header
+//                .addFilterAfter(new OptionsRequestFilter(), CorsFilter.class);
 
         http.formLogin().disable();
 //                .successHandler(successHandler)

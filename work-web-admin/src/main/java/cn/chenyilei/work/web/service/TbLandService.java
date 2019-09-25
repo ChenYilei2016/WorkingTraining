@@ -28,5 +28,5 @@ public interface TbLandService {
 
     void updateLand(TbLand tbLand);
 
-
+    void deleteLand(Integer landId);
 }

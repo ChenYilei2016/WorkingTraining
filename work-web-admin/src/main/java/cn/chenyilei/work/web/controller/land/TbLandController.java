@@ -21,7 +21,7 @@ import java.util.List;
  * @email 705029004@qq.com
  * @date 2019/09/23 13:46
  */
-@Api("田地相关操作")
+@Api(tags = "TbLandController 田地相关接口")
 @RestController
 @RequestMapping("/land")
 public class TbLandController {
@@ -72,8 +72,8 @@ public class TbLandController {
     @ApiOperation("农民删除自己的田!")
     @DeleteMapping("/delete/{landId}")
     public AjaxResult deleteLand(@PathVariable("landId")Integer landId){
-        //TODO: 未实现
         //已经被租的地不能删除!
+        tbLandService.deleteLand(landId);
         return AjaxResult.success(null,"注册田地成功!");
     }
 

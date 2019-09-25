@@ -45,8 +45,6 @@ public class NormalCreateAuthenticationFilter extends AbstractAuthenticationProc
     public void nowInit() {
         this.setAuthenticationSuccessHandler(new SuccessHandler());
         this.setAuthenticationFailureHandler(new FailureHandler());
-        //不将认证后的context放入session
-//        this.setSessionAuthenticationStrategy(new NullAuthenticatedSessionStrategy());
     }
 
     @Override

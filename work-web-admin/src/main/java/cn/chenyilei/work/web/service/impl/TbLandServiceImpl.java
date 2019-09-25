@@ -1,5 +1,6 @@
 package cn.chenyilei.work.web.service.impl;
 
+import cn.chenyilei.work.domain.constant.CodeResultEnum;
 import cn.chenyilei.work.domain.dto.LandRequestParam;
 import cn.chenyilei.work.domain.dto.PageRequest;
 import cn.chenyilei.work.domain.mapper.TbLandMapper;
@@ -8,6 +9,7 @@ import cn.chenyilei.work.domain.pojo.internal_enum.CheckEnum;
 import cn.chenyilei.work.domain.pojo.internal_enum.UserLevelEnum;
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.security.SecurityContext;
+import cn.chenyilei.work.web.exception.InvalidDoException;
 import cn.chenyilei.work.web.service.TbLandService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
@@ -15,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
@@ -78,7 +82,20 @@ public class TbLandServiceImpl implements TbLandService {
         tbLandMapper.updateByPrimaryKeySelective(tbLand);
     }
 
-
+    /**
+     * 已经租的田不能删除
+     * @param landId
+     */
+    @Override
+    @Transactional
+    public void deleteLand(Integer landId) {
+        TbLand tbLand = tbLandMapper.selectByPrimaryKey(landId);
+        if(tbLand.getLandIsRent()){
+            throw new InvalidDoException(CodeResultEnum.INVALID_DO,"土地已经被租!");
+        }
+        tbLand.setLandIsRent(false);
+        int delete = tbLandMapper.delete(tbLand);
+    }
 
 
     @Override

@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class ExceptionAdvice {
 
+    @ExceptionHandler(value = InvalidDoException.class)
+    public AjaxResult toExceptionClass(InvalidDoException e){
+        return AjaxResult.error(e.getMessage(),e.getCode());
+    }
+
     @ExceptionHandler(value = AccessDeniedException.class)
     public AjaxResult toAccessDeniedExceptionClass(Exception e){
         log.error("toAccessDeniedExceptionClass");

@@ -1,8 +1,11 @@
 package cn.chenyilei.work.domain.pojo.land;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Table(name = "tb_land_cart")
+@Data
 public class TbLandCart {
     /**
      * 唯一ID
@@ -26,77 +29,16 @@ public class TbLandCart {
     /**
      * 商品数量
      */
+    @Column(name = "number")
     private Integer number;
 
-    /**
-     * 获取唯一ID
-     *
-     * @return id - 唯一ID
-     */
-    public Integer getId() {
-        return id;
-    }
+    @Column(name = "name")
+    private String name ;
 
-    /**
-     * 设置唯一ID
-     *
-     * @param id 唯一ID
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @Column(name = "image")
+    private String image;
 
-    /**
-     * 获取用户ID
-     *
-     * @return user_id - 用户ID
-     */
-    public Integer getUserId() {
-        return userId;
-    }
+    @Column(name = "price")
+    private Integer price;
 
-    /**
-     * 设置用户ID
-     *
-     * @param userId 用户ID
-     */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    /**
-     * 获取土地ID
-     *
-     * @return land_id - 土地ID
-     */
-    public Integer getLandId() {
-        return landId;
-    }
-
-    /**
-     * 设置土地ID
-     *
-     * @param landId 土地ID
-     */
-    public void setLandId(Integer landId) {
-        this.landId = landId;
-    }
-
-    /**
-     * 获取商品数量
-     *
-     * @return number - 商品数量
-     */
-    public Integer getNumber() {
-        return number;
-    }
-
-    /**
-     * 设置商品数量
-     *
-     * @param number 商品数量
-     */
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
 }

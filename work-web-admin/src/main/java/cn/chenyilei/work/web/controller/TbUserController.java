@@ -9,6 +9,7 @@ import cn.chenyilei.work.domain.dto.wx.WxUserRequestBody;
 import cn.chenyilei.work.security.SecurityContext;
 import cn.chenyilei.work.web.security.processor.wx.WxUserDetailService;
 import cn.chenyilei.work.web.service.TbUserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
  * @email 705029004@qq.com
  * @date 2019/09/05 15:31
  */
+@Api(tags = "用户相关接口 TbUserController")
 @Controller
 @ResponseBody
 @RequestMapping("/user")

@@ -16,4 +16,11 @@ public class PageRequest {
     private Integer page = 1;
     private Integer pageSize  = 6;
 
+    public static PageRequest of(Integer page, Integer pageSize){
+        PageRequest pageRequest = new PageRequest();
+        pageRequest.setPage(page);
+        pageRequest.setPageSize(pageSize);
+        return pageRequest;
+    }
+
 }

@@ -12,15 +12,19 @@ import lombok.ToString;
  */
 @Getter
 public enum CodeResultEnum {
-    SUCCESS(200),
-    BAD_REQUEST(400),
-    UNAUTHORIZED(401), // 没有认证
-    FORBIDDEN(403), // 权限不够
-    UNKNOWERROR(99999) //未知错误
+    SUCCESS(200,"成功"),
+    BAD_REQUEST(400,"错误的请求"),
+    UNAUTHORIZED(401,"没有认证"),
+    FORBIDDEN(403,"权限不够"),
+
+    INVALID_DO(20000,"这次请求被禁止!"),
+    UNKNOWERROR(99999,"未知错误")
     ;
 
     private int code ;
-    CodeResultEnum(int code){
+    private String desc;
+    CodeResultEnum(int code, String desc ){
         this.code = code;
+        this.desc = desc;
     }
 }

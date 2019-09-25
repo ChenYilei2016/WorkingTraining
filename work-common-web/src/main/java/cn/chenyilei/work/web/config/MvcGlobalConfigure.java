@@ -40,12 +40,13 @@ public class MvcGlobalConfigure implements WebMvcConfigurer {
                 .excludePathPatterns("/static/**");
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowCredentials(true)
-                .allowedMethods("*")
-                .allowedHeaders("*")
-                .allowedOrigins("*");
-    }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowCredentials(true)
+//                .allowedMethods("*")
+//                .allowedHeaders("*")
+//        .all
+//                ;
+//    }
 }

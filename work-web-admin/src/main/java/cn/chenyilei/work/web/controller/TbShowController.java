@@ -23,7 +23,7 @@ import java.util.List;
  * @email 705029004@qq.com
  * @date 2019/09/20 16:11
  */
-@Api("风采展示接口")
+@Api(tags = "TbShowController 风采展示接口")
 @RestController
 @RequestMapping("/show")
 public class TbShowController {
@@ -69,7 +69,7 @@ public class TbShowController {
     @PostMapping("/insertOne")
     public AjaxResult insertOne(ShowRequestParam tbShow
                               , @RequestParam(value = "file",required = false) MultipartFile file) throws Exception {
-        if (file != null) {
+        if (file != null && !file.isEmpty()) {
             String imageUrl = fileService.uploadImg(file);
             tbShow.setShowImage(imageUrl);
         }

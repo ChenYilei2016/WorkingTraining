@@ -32,6 +32,13 @@ public class TbActivitiesCart {
     @Column(name = "number")
     private Integer number;
 
+    @Column(name = "name")
+    private String name ;
+
     @Column(name = "image")
     private String image;
+
+    @Column(name = "price")
+    private Integer price;
+
 }

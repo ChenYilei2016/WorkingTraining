@@ -40,7 +40,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public String uploadImg(byte[] bytes, String filename) throws Exception {
-        if(bytes.length <= 1){
+        if(bytes.length < 1){
             throw new RuntimeException("上传的图片大小有问题!");
         }
 
