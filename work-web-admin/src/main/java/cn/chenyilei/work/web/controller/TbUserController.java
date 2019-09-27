@@ -35,7 +35,7 @@ public class TbUserController{
 
     @ApiOperation("得到用户的相关信息!")
     @GetMapping("/detail")
-    public AjaxResult userDetail(){
+    public AjaxResult<TbUser> userDetail(){
         TbUser tbUser = tbUserService.selectUserDetail();
         return AjaxResult.success(tbUser,"查询成功!");
     }

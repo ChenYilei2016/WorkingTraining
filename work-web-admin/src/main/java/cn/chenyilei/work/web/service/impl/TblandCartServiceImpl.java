@@ -40,7 +40,7 @@ public class TblandCartServiceImpl implements TblandCartService {
     }
 
     @Override
-    public void insertCartOne(LandCartRequestParam.InsertCartOne param) {
+    public Integer insertCartOne(LandCartRequestParam.InsertCartOne param) {
         TbLand tbLand = tbLandMapper.selectByPrimaryKey(param.getLandId());
 
         //将土地中的信息放入购物车中便于查询
@@ -48,6 +48,7 @@ public class TblandCartServiceImpl implements TblandCartService {
         tbLandCart.setImage(tbLand.getLandImage());
         tbLandCart.setPrice(tbLand.getLandPrice());
         tbLandCart.setName(tbLand.getLandName());
+
         tbLandCart.setId(param.getLandId());
         tbLandCart.setNumber(param.getNumber());
 
@@ -55,6 +56,7 @@ public class TblandCartServiceImpl implements TblandCartService {
         tbLandCart.setUserId(Integer.valueOf(user.getUserId()));
 
         tbLandCartMapper.insertSelective(tbLandCart);
+        return tbLandCart.getId();
     }
 
     @Override

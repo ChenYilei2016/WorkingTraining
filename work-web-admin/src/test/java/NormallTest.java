@@ -2,6 +2,8 @@ import cn.hutool.crypto.digest.BCrypt;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * 注释
@@ -20,5 +22,13 @@ public class NormallTest {
 
     }
 
+    @Test
+    public void time(){
+        Calendar calendar =new GregorianCalendar();
+        System.out.println(calendar);
+        System.out.println("");
+        calendar.add(Calendar.DAY_OF_MONTH,10);
+        System.out.println( calendar.toString());
+    }
 }
 

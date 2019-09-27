@@ -44,13 +44,21 @@ public class TbLandServiceImpl implements TbLandService {
     }
 
     @Override
-    public List<TbLand> selectMyList(LandRequestParam landRequestParam, PageRequest pageRequest) {
+    public List<TbLand> selectFarmerList(LandRequestParam landRequestParam, PageRequest pageRequest) {
         AuthenticationUser user = SecurityContext.getSecurityContextPrincipal();
         TbLand tbLand = new TbLand();
         BeanUtils.copyProperties(landRequestParam,tbLand);
         tbLand.setLandUserId(Integer.valueOf(user.getUserId()));
         PageHelper.startPage(pageRequest.getPage(),pageRequest.getPageSize());
         return tbLandMapper.select(tbLand);
+    }
+
+    @Override
+    public List<TbLand> selectCustomerList(LandRequestParam landRequestParam, PageRequest pageRequest) {
+        AuthenticationUser user = SecurityContext.getSecurityContextPrincipal();
+        PageHelper.startPage(pageRequest.getPage(),pageRequest.getPageSize());
+        List<TbLand> tbLandList = tbLandMapper.queryCustomerList(user.getUserId());
+        return tbLandList;
     }
 
     @Override

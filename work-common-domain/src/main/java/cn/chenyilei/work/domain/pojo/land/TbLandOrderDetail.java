@@ -15,6 +15,12 @@ public class TbLandOrderDetail {
     private Integer id;
 
     /**
+     * 订单的ID
+     */
+    @Column(name = "order_id")
+    private Integer orderId;
+
+    /**
      * 土地ID
      */
     @Column(name = "land_id")
@@ -31,6 +37,14 @@ public class TbLandOrderDetail {
      * 租的天数
      */
     @Column(name = "land_number")
-    private String landNumber;
+    private Integer landNumber;
+
+
+    @Column(name = "land_image")
+    private String landImage;
+
+
+    @Column(name = "land_price")
+    private Integer landPrice;
 
 }

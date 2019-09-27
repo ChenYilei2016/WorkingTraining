@@ -17,4 +17,15 @@
     <result column="land_rent_endtime" jdbcType="TIMESTAMP" property="landRentEndtime" />
     <result column="land_createtime" jdbcType="TIMESTAMP" property="landCreatetime" />
   </resultMap>
+
+  <select id="queryCustomerList" resultType="cn.chenyilei.work.domain.pojo.land.TbLand">
+    SELECT
+        tl.*
+    FROM
+        tb_bind_user_land tbul
+        JOIN tb_land tl ON tbul.ul_land_id = tl.land_id
+    WHERE
+        tbul.ul_buy_user_id = #{userId}
+  </select>
+
 </mapper>

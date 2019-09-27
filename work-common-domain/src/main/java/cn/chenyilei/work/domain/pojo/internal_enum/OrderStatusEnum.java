@@ -13,18 +13,20 @@ import lombok.Getter;
 public enum  OrderStatusEnum {
 
     NEW(0,"创建新订单"),
+    PAYING(1,"支付中"),
+    PAYSUCCESS(2,"支付成功"),
 
-    PAYSUCCESS(1,"支付成功"),
+    FAIL(3,"支付失败"),
 
     SUCCESS(200,"完成订单")
 
     ;
 
-    private int roleId ;
+    private int code ;
     private String desc ;
 
-    OrderStatusEnum(int roleId, String desc) {
-        this.roleId = roleId;
+    OrderStatusEnum(int code, String desc) {
+        this.code = code;
         this.desc = desc;
     }
 }

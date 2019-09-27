@@ -16,7 +16,9 @@ import java.util.List;
 public interface TbLandService {
     List<TbLand> selectAll(LandRequestParam landRequestParam, PageRequest pageRequest);
 
-    List<TbLand> selectMyList(LandRequestParam landRequestParam, PageRequest pageRequest);
+    List<TbLand> selectFarmerList(LandRequestParam landRequestParam, PageRequest pageRequest);
+
+    List<TbLand> selectCustomerList(LandRequestParam landRequestParam, PageRequest pageRequest);
 
     TbLand selectOne(Integer landId, LandRequestParam landRequestParam, PageRequest pageRequest);
 

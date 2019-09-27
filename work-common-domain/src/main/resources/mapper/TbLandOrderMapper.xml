@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.chenyilei.work.domain.mapper.TbLandOrderMapper">
-  <resultMap id="BaseResultMap" type="cn.chenyilei.work.domain.pojo.land.TbLandOrder">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="buyer_id" jdbcType="INTEGER" property="buyerId" />
-    <result column="seller_id" jdbcType="INTEGER" property="sellerId" />
-    <result column="price" jdbcType="INTEGER" property="price" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
-    <result column="orderstatus" jdbcType="VARCHAR" property="orderstatus" />
+
+  <resultMap id="orderExt" type="cn.chenyilei.work.domain.pojo.land.ext.TbLandOrderExt" >
+    <id column="orderId" jdbcType="INTEGER" property="id" />
+    <result column="buyer_id" property="buyerId"></result>
+    <collection property="tbLandOrderDetails" ofType="cn.chenyilei.work.domain.pojo.land.TbLandOrderDetail">
+      <id column="orderDetailId" jdbcType="INTEGER" property="id"></id>
+      <result property="landId" column="land_id"></result>
+    </collection>
   </resultMap>
+
+  <select id="selectOrderExtById" resultMap="orderExt">
+    SELECT
+        tlo.id AS "orderId",
+        tlod.id AS "orderDetailId",
+        tlo.*,
+        tlod.*
+    FROM
+	tb_land_order tlo
+	JOIN tb_land_order_detail tlod ON tlo.id = tlod.order_id
+    WHERE tlo.id = #{orderId}
+  </select>
+
 </mapper>

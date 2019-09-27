@@ -35,7 +35,7 @@ public class TbPlantingController {
 
     @ApiOperation("查询账号所有的种植信息![区分登陆账号]")
     @GetMapping("/selectAll")
-    public AjaxResult selectAll(PageRequest pageRequest){
+    public AjaxResult<List<TbPlanting>> selectAll(PageRequest pageRequest){
         List<TbPlanting> tbPlantings =plantingService.selectAll(pageRequest);
         return AjaxPageResult
                 .builder()

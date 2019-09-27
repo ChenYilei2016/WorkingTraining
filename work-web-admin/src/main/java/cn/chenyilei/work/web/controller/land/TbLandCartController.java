@@ -6,6 +6,7 @@ import cn.chenyilei.work.domain.vo.AjaxResult;
 import cn.chenyilei.work.web.service.TblandCartService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,17 +28,17 @@ public class TbLandCartController {
 
     @ApiOperation("查询自己的购物车")
     @GetMapping("/selectMyCart")
-    public AjaxResult selectMyCart(LandCartRequestParam landCartRequestParam){
+    public AjaxResult<List<TbLandCart>> selectMyCart(LandCartRequestParam landCartRequestParam){
         List<TbLandCart> tbLandCartList = tblandCartService.selectMyCart(landCartRequestParam);
         return AjaxResult.success(tbLandCartList,"查询成功!");
     }
 
     @ApiOperation("加入田地购物车")
     @PostMapping("/insertCartOne")
-    public AjaxResult insertCartOne(@RequestBody LandCartRequestParam.InsertCartOne param){
+    public AjaxResult<Integer> insertCartOne(@RequestBody LandCartRequestParam.InsertCartOne param){
         //重复添加等暂时不弄
-        tblandCartService.insertCartOne(param);
-        return AjaxResult.success(null,"加入成功!");
+        Integer cartId = tblandCartService.insertCartOne(param);
+        return AjaxResult.success(cartId,"加入成功!");
     }
 
     @ApiOperation("删除购物车中一件商品")

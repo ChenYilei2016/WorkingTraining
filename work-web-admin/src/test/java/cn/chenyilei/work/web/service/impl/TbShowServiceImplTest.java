@@ -1,5 +1,6 @@
 package cn.chenyilei.work.web.service.impl;
 
+import cn.chenyilei.work.commonutils.IdWorker;
 import cn.chenyilei.work.domain.mapper.TbShowMapper;
 import cn.chenyilei.work.domain.pojo.TbShow;
 import cn.chenyilei.work.web.WebAdminApplication;
@@ -25,12 +26,14 @@ import static org.junit.Assert.*;
 public class TbShowServiceImplTest {
     @Autowired
     TbShowMapper tbShowMapper;
+    @Autowired
+    IdWorker idWorker;
 
     @Test
     public void insertShow() {
-        TbShow tbShow = new TbShow();
-        tbShow.setShowUpdatetime(new Date());
-        tbShow.setShowCreatetime(new Date());
-        tbShowMapper.insert(tbShow);
+        System.out.println(idWorker.nextId());
+        System.out.println(idWorker.nextId());
+        System.out.println(idWorker.nextId());
+        System.out.println(idWorker.nextId());
     }
 }

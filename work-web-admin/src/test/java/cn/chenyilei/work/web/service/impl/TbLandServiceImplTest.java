@@ -1,6 +1,7 @@
 package cn.chenyilei.work.web.service.impl;
 
 import cn.chenyilei.work.domain.mapper.TbLandMapper;
+import cn.chenyilei.work.domain.mapper.TbLandOrderMapper;
 import cn.chenyilei.work.domain.pojo.land.TbLand;
 import cn.chenyilei.work.domain.pojo.user.TbUser;
 import cn.chenyilei.work.web.WebAdminApplication;
@@ -25,10 +26,11 @@ public class TbLandServiceImplTest {
     @Autowired
     TbLandMapper tbLandMapper;
 
+    @Autowired
+    TbLandOrderMapper tbLandOrderMapper;
     @Test
     public void selectAll() {
-        TbLand tbLand = new TbLand();
-        System.out.println(tbLandMapper.select(tbLand));
+        System.out.println(tbLandOrderMapper.selectOrderExtById(11));
 
     }
 

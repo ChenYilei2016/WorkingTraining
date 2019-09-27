@@ -15,7 +15,7 @@ import java.util.List;
 public interface TblandCartService {
     List<TbLandCart> selectMyCart(LandCartRequestParam landCartRequestParam);
 
-    void insertCartOne(LandCartRequestParam.InsertCartOne landCartRequestParam);
+    Integer insertCartOne(LandCartRequestParam.InsertCartOne landCartRequestParam);
 
     void deleteCart(Integer cartId);
 

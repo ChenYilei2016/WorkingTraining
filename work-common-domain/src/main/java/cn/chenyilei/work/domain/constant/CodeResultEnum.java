@@ -17,6 +17,8 @@ public enum CodeResultEnum {
     UNAUTHORIZED(401,"没有认证"),
     FORBIDDEN(403,"权限不够"),
 
+    INVALID_PARAM(70000,"错误的参数"),
+    REPEATE(88888,"重复的操作"),
     INVALID_DO(20000,"这次请求被禁止!"),
     UNKNOWERROR(99999,"未知错误")
     ;

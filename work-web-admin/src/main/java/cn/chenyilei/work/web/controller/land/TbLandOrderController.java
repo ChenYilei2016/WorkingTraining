@@ -1,11 +1,25 @@
 package cn.chenyilei.work.web.controller.land;
 
+import cn.chenyilei.work.domain.constant.CodeResultEnum;
+import cn.chenyilei.work.domain.dto.LandCartRequestParam;
+import cn.chenyilei.work.domain.dto.TbOrderDto;
+import cn.chenyilei.work.domain.pojo.land.TbLandOrder;
+import cn.chenyilei.work.domain.pojo.land.ext.TbLandOrderExt;
+import cn.chenyilei.work.domain.vo.AjaxResult;
+import cn.chenyilei.work.web.exception.InvalidDoException;
+import cn.chenyilei.work.web.exception.OrderException;
+import cn.chenyilei.work.web.service.TbLandOrderService;
+import cn.chenyilei.work.web.service.TblandCartService;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
- * 注释
  *
  * @author chenyilei
  * @email 705029004@qq.com
@@ -15,13 +29,57 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/landorder")
 public class TbLandOrderController {
+    @Autowired
+    TbLandOrderService tbLandOrderService;
+    @Autowired
+    TblandCartService tblandCartService;
 
-    //查询用户具有的订单
+    /**
+     *  创建订单 返回订单号
+     * @see cn.chenyilei.work.domain.pojo.internal_enum.OrderStatusEnum
+     */
+    @ApiOperation("创建订单")
+    @PostMapping("/createOrder")
+    public AjaxResult<Integer> createOrder(@RequestBody TbOrderDto tbOrderDto){
+        if(null != tbOrderDto.getProduceId() ){
+            //将商品转成购物车直接进行下单
+            LandCartRequestParam.InsertCartOne param = new LandCartRequestParam.InsertCartOne();
+            param.setLandId(tbOrderDto.getProduceId());
+            param.setNumber(1);
+            Integer cartId = tblandCartService.insertCartOne(param);
+            tbOrderDto.setCartIds(Arrays.asList(cartId));
+        }
+        Integer orderId = tbLandOrderService.createOrder(tbOrderDto);
+        return AjaxResult.success(orderId,"创建订单成功!");
+    }
 
-    //查询指定订单的详细细节
+    /**
+     * 需要notify来更改订单
+     * @return
+     */
+    @ApiOperation("订单付款")
+    @PostMapping("/payOrder")
+    public AjaxResult payOrder(@RequestBody TbOrderDto tbOrderDto){
+        if(tbOrderDto.getOrderId() == null){
+            throw new OrderException(CodeResultEnum.INVALID_PARAM);
+        }
+        tbLandOrderService.payOrder(tbOrderDto);
+        return AjaxResult.success(null,"支付中!");
+    }
 
-    //下单
+    @ApiOperation("查询客户具有的订单列表")
+    @GetMapping("/selectMyList")
+    public AjaxResult<List<TbLandOrder>> queryOrdersNoDetail(){
+        List<TbLandOrder> tbLandOrders = tbLandOrderService.selectMyOrders();
+        return AjaxResult.success(tbLandOrders,"查询成功!");
+    }
 
-    //退单
+    @ApiOperation("查询客户具有的订单和详情")
+    @GetMapping("/select/{orderId}")
+    public AjaxResult<TbLandOrderExt> queryOrderById(@PathVariable("orderId") Integer orderId){
+        TbLandOrderExt tbLandOrderExt = tbLandOrderService.queryOrderById(orderId);
+        return AjaxResult.success(tbLandOrderExt,"查询成功!");
+    }
+
 
 }

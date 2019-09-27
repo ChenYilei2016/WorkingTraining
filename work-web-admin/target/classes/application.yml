@@ -41,7 +41,7 @@ mybatis:
   mapper-locations: classpath*:/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
-
+    auto-mapping-behavior: full
 #################  以下为个人自定义特别变量  ###################
 cyl:
   security:

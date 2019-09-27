@@ -1,11 +1,13 @@
 package cn.chenyilei.work.domain.pojo.land;
 
 import cn.chenyilei.work.domain.pojo.internal_enum.OrderStatusEnum;
+import lombok.Data;
 
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "tb_land_order")
+@Data
 public class TbLandOrder {
     /**
      * 唯一ID
@@ -29,125 +31,17 @@ public class TbLandOrder {
     /**
      * 订单价格
      */
+    @Column(name = "price")
     private Integer price;
 
+    @Column(name = "createtime")
     private Date createtime;
 
+    @Column(name = "updatetime")
     private Date updatetime;
 
+    @Column(name = "orderstatus")
     private OrderStatusEnum orderstatus;
 
-    /**
-     * 获取唯一ID
-     *
-     * @return id - 唯一ID
-     */
-    public Integer getId() {
-        return id;
-    }
 
-    /**
-     * 设置唯一ID
-     *
-     * @param id 唯一ID
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取买家ID
-     *
-     * @return buyer_id - 买家ID
-     */
-    public Integer getBuyerId() {
-        return buyerId;
-    }
-
-    /**
-     * 设置买家ID
-     *
-     * @param buyerId 买家ID
-     */
-    public void setBuyerId(Integer buyerId) {
-        this.buyerId = buyerId;
-    }
-
-    /**
-     * 获取卖家ID
-     *
-     * @return seller_id - 卖家ID
-     */
-    public Integer getSellerId() {
-        return sellerId;
-    }
-
-    /**
-     * 设置卖家ID
-     *
-     * @param sellerId 卖家ID
-     */
-    public void setSellerId(Integer sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    /**
-     * 获取订单价格
-     *
-     * @return price - 订单价格
-     */
-    public Integer getPrice() {
-        return price;
-    }
-
-    /**
-     * 设置订单价格
-     *
-     * @param price 订单价格
-     */
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    /**
-     * @return createtime
-     */
-    public Date getCreatetime() {
-        return createtime;
-    }
-
-    /**
-     * @param createtime
-     */
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
-
-    /**
-     * @return updatetime
-     */
-    public Date getUpdatetime() {
-        return updatetime;
-    }
-
-    /**
-     * @param updatetime
-     */
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
-
-    /**
-     * @return orderstatus
-     */
-    public OrderStatusEnum getOrderstatus() {
-        return orderstatus;
-    }
-
-    /**
-     * @param orderstatus
-     */
-    public void setOrderstatus(OrderStatusEnum orderstatus) {
-        this.orderstatus = orderstatus;
-    }
 }

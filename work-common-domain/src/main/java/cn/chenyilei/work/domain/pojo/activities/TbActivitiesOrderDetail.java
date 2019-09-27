@@ -1,8 +1,11 @@
 package cn.chenyilei.work.domain.pojo.activities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Table(name = "tb_activities_order_detail")
+@Data
 public class TbActivitiesOrderDetail {
     /**
      * 活动订单详情主键
@@ -10,7 +13,11 @@ public class TbActivitiesOrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    /**
+     * 订单的ID
+     */
+    @Column(name = "order_id")
+    private Integer orderId;
     /**
      * 活动ID
      */
@@ -26,77 +33,14 @@ public class TbActivitiesOrderDetail {
     /**
      * 买的数量
      */
+    @Column(name = "number")
     private Integer number;
 
-    /**
-     * 获取活动订单详情主键
-     *
-     * @return id - 活动订单详情主键
-     */
-    public Integer getId() {
-        return id;
-    }
+    @Column(name = "activities_image")
+    private String activitiesImage;
 
-    /**
-     * 设置活动订单详情主键
-     *
-     * @param id 活动订单详情主键
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    /**
-     * 获取活动ID
-     *
-     * @return activities_id - 活动ID
-     */
-    public Integer getActivitiesId() {
-        return activitiesId;
-    }
+    @Column(name = "activities_price")
+    private Integer activitiesPrice;
 
-    /**
-     * 设置活动ID
-     *
-     * @param activitiesId 活动ID
-     */
-    public void setActivitiesId(Integer activitiesId) {
-        this.activitiesId = activitiesId;
-    }
-
-    /**
-     * 获取活动名
-     *
-     * @return activities_name - 活动名
-     */
-    public String getActivitiesName() {
-        return activitiesName;
-    }
-
-    /**
-     * 设置活动名
-     *
-     * @param activitiesName 活动名
-     */
-    public void setActivitiesName(String activitiesName) {
-        this.activitiesName = activitiesName;
-    }
-
-    /**
-     * 获取买的数量
-     *
-     * @return number - 买的数量
-     */
-    public Integer getNumber() {
-        return number;
-    }
-
-    /**
-     * 设置买的数量
-     *
-     * @param number 买的数量
-     */
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
 }
