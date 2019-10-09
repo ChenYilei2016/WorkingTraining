@@ -39,7 +39,7 @@ public class TbActivities {
      * 审核状态: 0 未审核, 1 审核成功 ,2 审核失败
      */
     @Column(name = "activities_status")
-    private CheckEnum activitiesStatus = CheckEnum.SUCCESS;
+    private CheckEnum activitiesStatus ;
 
     /**
      * 活动价格
@@ -49,7 +49,7 @@ public class TbActivities {
 
 
     @Column(name = "activities_is_open")
-    private boolean activitiesIsOpen;
+    private Boolean activitiesIsOpen;
 
     /**
      * 库存数量
@@ -62,6 +62,12 @@ public class TbActivities {
      */
     @Column(name = "activities_image")
     private String activitiesImage;
+
+    /**
+     * 描述
+     */
+    @Column(name = "activities_information")
+    private String activitiesInformation;
 
     /**
      * 举办时间
@@ -88,4 +94,7 @@ public class TbActivities {
     private Date activitiesUpdatetime;
 
 
+
+    @Column(name = "sys_version")
+    private Integer sysVersion;
 }

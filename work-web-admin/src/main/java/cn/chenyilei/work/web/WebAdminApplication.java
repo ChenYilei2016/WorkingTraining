@@ -10,12 +10,18 @@ import cn.hutool.core.util.ZipUtil;
 import cn.hutool.extra.ssh.JschUtil;
 import cn.hutool.extra.template.TemplateUtil;
 import cn.hutool.poi.excel.ExcelPicUtil;
+import org.apache.catalina.Executor;
+import org.apache.catalina.LifecycleException;
+import org.apache.catalina.connector.Connector;
+import org.apache.catalina.core.StandardThreadExecutor;
+import org.apache.coyote.ProtocolHandler;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
+import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServer;
 import org.springframework.boot.web.server.Ssl;
@@ -67,9 +73,11 @@ public class WebAdminApplication implements CommandLineRunner {
                 ssl.setKeyPassword(sslProperties.getKeyPassword());
                 ssl.setKeyStoreType(sslProperties.getKeyStoreType());
 
+
                 if( factory instanceof TomcatServletWebServerFactory ){
                     TomcatServletWebServerFactory tomcatServletWebServerFactory = (TomcatServletWebServerFactory) factory;
                     tomcatServletWebServerFactory.setSsl(ssl);
+
                 }else if(factory instanceof JettyServletWebServerFactory){
                     JettyServletWebServerFactory jettyServletWebServerFactory = (JettyServletWebServerFactory) factory;
                     jettyServletWebServerFactory.setSsl(ssl);

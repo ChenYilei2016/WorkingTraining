@@ -17,4 +17,29 @@
     <result column="activities_createtime" jdbcType="TIMESTAMP" property="activitiesCreatetime" />
     <result column="activities_updatetime" jdbcType="TIMESTAMP" property="activitiesUpdatetime" />
   </resultMap>
+
+  <update id="hasStore" >
+    update tb_activities set sys_version = sys_version +1
+    where activities_id = #{activityId}
+    and activities_storenumber > 0
+  </update>
+
+  <update id="lessNumber">
+    UPDATE tb_activities
+    SET activities_storenumber = activities_storenumber - #{number}
+    WHERE
+        activities_id = #{activityId}
+    AND
+	    activities_storenumber - #{number} > 0
+  </update>
+
+  <select id="queryCustomerList" resultType="cn.chenyilei.work.domain.pojo.activities.TbActivities">
+    SELECT
+	ta.*
+    FROM
+        tb_bind_user_activities tbua
+    join tb_activities ta
+    on tbua.ua_activities_id = ta.activities_id
+    where tbua.ua_buy_user_id = #{userId}
+  </select>
 </mapper>

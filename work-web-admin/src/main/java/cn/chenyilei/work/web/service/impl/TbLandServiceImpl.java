@@ -66,7 +66,6 @@ public class TbLandServiceImpl implements TbLandService {
         TbLand tbLand = new TbLand();
         BeanUtils.copyProperties(landRequestParam,tbLand);
         tbLand.setLandId(landId);
-        PageHelper.startPage(pageRequest.getPage(),pageRequest.getPageSize());
         return tbLandMapper.selectOne(tbLand);
     }
 
@@ -76,6 +75,7 @@ public class TbLandServiceImpl implements TbLandService {
         tbLand.setLandCreatetime(new Date());
         tbLand.setLandUpdatetime(new Date());
         tbLand.setLandStatus(CheckEnum.SUCCESS);
+        tbLand.setLandIsOpen(false);
 
         //设置用户的ID
         AuthenticationUser user = SecurityContext.getSecurityContextPrincipal();

@@ -44,7 +44,8 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException("上传的图片大小有问题!");
         }
 
-        String suffix = StringUtils.substringAfter(filename, "."); //文件后缀 .jpg  ....
+        String suffix = StringUtils.substringAfterLast(filename,"."); //文件后缀 .jpg  ....
+
         String fileMd5Name = md5utils.digestHex(bytes); //文件md5名字
         String baseUrl = ""+fileMd5Name.charAt(0)+"/"+fileMd5Name+"."+suffix; //基础路径 : s/filename.jpg 需要判断有无文件夹
         File uploadFile = new File(systemProperties.getUploadImgDirPerfix()+baseUrl); //完整文件

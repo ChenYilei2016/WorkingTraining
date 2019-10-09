@@ -2,6 +2,7 @@ package cn.chenyilei.work.web.controller.land;
 
 import cn.chenyilei.work.domain.dto.LandRequestParam;
 import cn.chenyilei.work.domain.dto.PageRequest;
+import cn.chenyilei.work.domain.pojo.internal_enum.CheckEnum;
 import cn.chenyilei.work.domain.pojo.land.TbLand;
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.domain.vo.AjaxPageResult;
@@ -22,7 +23,7 @@ import java.util.List;
  * @email 705029004@qq.com
  * @date 2019/09/23 13:46
  */
-@Api(tags = "customer TbLandController 客户田地相关接口")
+@Api(tags = "TbCustomerLandController 客户田地相关接口")
 @RestController
 @RequestMapping("/customer/land")
 public class TbCustomerLandController {
@@ -41,6 +42,8 @@ public class TbCustomerLandController {
     @ApiOperation("客户查询所有的田")
     @GetMapping("/selectAll")
     public AjaxResult<List<TbLand>> selectAll(LandRequestParam landRequestParam, PageRequest pageRequest){
+        //客户看审核成功的田
+        landRequestParam.setLandStatus(CheckEnum.SUCCESS);
         List<TbLand> tbLands = tbLandService.selectAll(landRequestParam,pageRequest);
         return AjaxPageResult
                 .builder()

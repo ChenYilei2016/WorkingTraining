@@ -55,7 +55,7 @@ public class TbUserController{
      */
     @ApiOperation("首次登陆小程序绑定自己的账号身份!")
     @PostMapping("/binding")
-    public AjaxResult binding ( @ApiParam("仅需要level参数") @RequestBody WxUserRequestBody wxUserRequestBody){
+    public AjaxResult<String> binding ( @ApiParam("仅需要level参数") @RequestBody WxUserRequestBody wxUserRequestBody){
         if(null == wxUserRequestBody.getLevel()){
             return AjaxResult.error("没有level参数!", CodeResultEnum.BAD_REQUEST);
         }

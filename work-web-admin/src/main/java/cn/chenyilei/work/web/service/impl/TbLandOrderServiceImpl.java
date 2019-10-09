@@ -2,6 +2,7 @@ package cn.chenyilei.work.web.service.impl;
 
 import cn.chenyilei.work.commonutils.MapUtils;
 import cn.chenyilei.work.domain.constant.CodeResultEnum;
+import cn.chenyilei.work.domain.dto.PageRequest;
 import cn.chenyilei.work.domain.dto.TbOrderDto;
 import cn.chenyilei.work.domain.mapper.*;
 import cn.chenyilei.work.domain.pojo.internal_enum.OrderStatusEnum;
@@ -11,11 +12,10 @@ import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.security.SecurityContext;
 import cn.chenyilei.work.web.exception.OrderException;
 import cn.chenyilei.work.web.service.TbLandOrderService;
-import cn.hutool.core.map.MapUtil;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,6 +29,8 @@ import java.util.stream.Collectors;
  */
 @Service
 public class TbLandOrderServiceImpl implements TbLandOrderService {
+
+    public static final String ORDERBY_CREATETIME_DESC= "createtime desc";
 
     @Autowired
     TbLandOrderMapper tbLandOrderMapper;
@@ -77,12 +79,14 @@ public class TbLandOrderServiceImpl implements TbLandOrderService {
             }
         }
 
+        //购物车ID 和 土地实例的映射
         Map<Integer, TbLand> cartIds_tbLands_MAP = MapUtils.toMap(cartIds, tbLandList);
 
         //订单价格
         Integer totalPrice= 0;
 
         for (TbLandCart tbLandCart : tbLandCartList) {
+            //判断土地能否被购买等条件
 
             //查询田的相关信息
             TbLand tbLand = cartIds_tbLands_MAP.get(tbLandCart.getId());
@@ -129,6 +133,10 @@ public class TbLandOrderServiceImpl implements TbLandOrderService {
         Integer orderId = tbOrderDto.getOrderId();
         TbLandOrder tbLandOrder = tbLandOrderMapper.selectByPrimaryKey(orderId);
 
+        if(tbLandOrder.getOrderstatus() == OrderStatusEnum.PAYSUCCESS){
+            throw new OrderException(CodeResultEnum.REPEATE,"已经支付过!");
+        }
+
         //支付
         //TODO: 测试环境直接支付成功!
         PayImpl(tbLandOrder);
@@ -148,10 +156,13 @@ public class TbLandOrderServiceImpl implements TbLandOrderService {
     }
 
     @Override
-    public List<TbLandOrder> selectMyOrders() {
+    public List<TbLandOrder> selectMyOrders(PageRequest pageRequest) {
         AuthenticationUser user = SecurityContext.getSecurityContextPrincipal();
         TbLandOrder tbLandOrder = new TbLandOrder();
         tbLandOrder.setBuyerId(Integer.valueOf(user.getUserId()));
+
+        PageHelper.startPage(pageRequest.getPage(),pageRequest.getPageSize(),ORDERBY_CREATETIME_DESC);
+
         List<TbLandOrder> result = tbLandOrderMapper.select(tbLandOrder);
         return result;
     }
@@ -179,7 +190,7 @@ public class TbLandOrderServiceImpl implements TbLandOrderService {
             //绑定关系
             TbLand tbLand = tbLandMapper.selectByPrimaryKey(detail.getLandId());
             TbBindUserLand tbBindUserLand = new TbBindUserLand();
-            tbBindUserLand.setUlBuyUserId(Integer.valueOf(user.getUserId()));
+            tbBindUserLand.setUlBuyUserId(order.getBuyerId());
             tbBindUserLand.setUlSellUserId(tbLand.getLandUserId());
             tbBindUserLand.setUlLandId(detail.getLandId());
             tbBindUserLandMapper.insert(tbBindUserLand);

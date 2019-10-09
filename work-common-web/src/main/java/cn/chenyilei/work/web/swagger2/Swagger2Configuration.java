@@ -21,6 +21,7 @@ public class Swagger2Configuration {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .host("chenyilei.mynatapp.cc")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cn.chenyilei.work"))

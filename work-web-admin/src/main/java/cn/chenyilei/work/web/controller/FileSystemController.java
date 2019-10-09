@@ -6,10 +6,7 @@ import cn.chenyilei.work.web.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Random;
@@ -33,8 +30,9 @@ public class FileSystemController {
     private static Random random = new Random();
 
     @ApiOperation("上传图片表单key 为 file")
-    @PostMapping("/upload")
-    public AjaxResult uploadImg(@RequestParam("file") MultipartFile multipartFile){
+    @PostMapping(value = "/upload",produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public AjaxResult<String> uploadImg(@RequestParam("file") MultipartFile multipartFile){
         String visitUrl = null;
         try {
             visitUrl = fileService.uploadImg(multipartFile);

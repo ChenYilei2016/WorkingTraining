@@ -34,7 +34,7 @@ public class TbLand {
      * 审核状态: 0 未审核, 1 审核成功 ,2 审核失败
      */
     @Column(name = "land_status")
-    private CheckEnum landStatus = CheckEnum.SUCCESS;
+    private CheckEnum landStatus ;
 
     /**
      * 土地位置的经纬度( "116.0119343,39.66127144;116.7829835,40.2164962" )
@@ -90,5 +90,5 @@ public class TbLand {
      * 土地介绍
      */
     @Column(name = "land_information")
-    private Date landInformation;
+    private String landInformation;
 }
