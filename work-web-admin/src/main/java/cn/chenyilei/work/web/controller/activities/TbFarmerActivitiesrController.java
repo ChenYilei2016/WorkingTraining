@@ -4,19 +4,19 @@ import cn.chenyilei.work.domain.dto.ActivitiesQueryParam;
 import cn.chenyilei.work.domain.dto.LandRequestParam;
 import cn.chenyilei.work.domain.dto.PageRequest;
 import cn.chenyilei.work.domain.pojo.activities.TbActivities;
+import cn.chenyilei.work.domain.pojo.activities.ext.SellallVo;
 import cn.chenyilei.work.domain.pojo.internal_enum.CheckEnum;
 import cn.chenyilei.work.domain.pojo.land.TbLand;
 import cn.chenyilei.work.domain.vo.AjaxPageResult;
 import cn.chenyilei.work.domain.vo.AjaxResult;
 import cn.chenyilei.work.web.service.TbActivitiesService;
 import cn.chenyilei.work.web.service.TbLandService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import com.github.pagehelper.PageHelper;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -79,5 +79,18 @@ public class TbFarmerActivitiesrController {
         return AjaxResult.success(null,"更新活动成功!");
     }
 
+    @ApiOperation("农户查询 自己卖掉的活动的信息,类似账单")
+    @GetMapping("/select/sellall")
+    @ApiImplicitParams(value = @ApiImplicitParam(name = "startTime",value = "大于这个时间的查询,例如'2016-7-27' 这样的传入"))
+    public AjaxResult<List<SellallVo>> sellall(String startTime,PageRequest pageRequest){
+        PageHelper.startPage(pageRequest.getPage(),pageRequest.getPageSize());
+        List<SellallVo> sellall = tbActivitiesService.sellall(startTime);
+        return AjaxPageResult
+                .builder()
+                .success(true)
+                .msg("查询成功!")
+                .data(sellall)
+                .pageRequest(pageRequest);
+    }
 }
 

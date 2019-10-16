@@ -17,4 +17,5 @@ import lombok.Data;
 @Data
 public class LandRequestParam extends TbLand{
 
+    private String startTime;
 }

@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import tk.mybatis.mapper.entity.Example;
 
+import java.sql.Timestamp;
+
 import static org.junit.Assert.*;
 
 /**
@@ -34,5 +36,13 @@ public class TbActivitiesServiceImplTest {
     public void deleteActivities() {
         System.out.println(tbActivitiesMapper.hasStore(1));
         System.out.println(tbActivitiesMapper.queryCustomerList(2));
+    }
+
+    @Test
+    public void sellAll(){
+
+        System.out.println(tbActivitiesMapper.querySellallList(2,"2016-7-27") );
+        Timestamp timestamp = null;
+
     }
 }

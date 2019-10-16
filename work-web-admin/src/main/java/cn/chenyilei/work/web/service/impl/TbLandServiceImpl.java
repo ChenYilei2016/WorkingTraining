@@ -3,10 +3,14 @@ package cn.chenyilei.work.web.service.impl;
 import cn.chenyilei.work.domain.constant.CodeResultEnum;
 import cn.chenyilei.work.domain.dto.LandRequestParam;
 import cn.chenyilei.work.domain.dto.PageRequest;
+import cn.chenyilei.work.domain.mapper.TbBindUserLandMapper;
 import cn.chenyilei.work.domain.mapper.TbLandMapper;
+import cn.chenyilei.work.domain.mapper.TbUserMapper;
+import cn.chenyilei.work.domain.pojo.land.TbBindUserLand;
 import cn.chenyilei.work.domain.pojo.land.TbLand;
 import cn.chenyilei.work.domain.pojo.internal_enum.CheckEnum;
 import cn.chenyilei.work.domain.pojo.internal_enum.UserLevelEnum;
+import cn.chenyilei.work.domain.pojo.user.TbUser;
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.security.SecurityContext;
 import cn.chenyilei.work.web.exception.InvalidDoException;
@@ -35,6 +39,12 @@ public class TbLandServiceImpl implements TbLandService {
     @Autowired
     TbLandMapper tbLandMapper;
 
+    @Autowired
+    TbBindUserLandMapper tbBindUserLandMapper;
+
+    @Autowired
+    TbUserMapper tbUserMapper;
+
     @Override
     public List<TbLand> selectAll(LandRequestParam landRequestParam, PageRequest pageRequest) {
         TbLand tbLand = new TbLand();
@@ -49,8 +59,30 @@ public class TbLandServiceImpl implements TbLandService {
         TbLand tbLand = new TbLand();
         BeanUtils.copyProperties(landRequestParam,tbLand);
         tbLand.setLandUserId(Integer.valueOf(user.getUserId()));
+
+        Example example = new Example(tbLand.getClass());
+        Example.Criteria criteria = example.createCriteria().andEqualTo(tbLand);
+        //判断有无选择时间
+        if(landRequestParam.getStartTime() != null){
+            criteria
+                    .andGreaterThanOrEqualTo("landRentStarttime",landRequestParam.getStartTime());
+        }
+
         PageHelper.startPage(pageRequest.getPage(),pageRequest.getPageSize());
-        return tbLandMapper.select(tbLand);
+        //加上买的人姓名
+        List<TbLand> tbLandList = tbLandMapper.selectByExample(example);
+        for (TbLand land : tbLandList) {
+            TbBindUserLand tbBindUserLand = new TbBindUserLand();
+            tbBindUserLand.setUlLandId(land.getLandId());
+            TbBindUserLand bindResult = tbBindUserLandMapper.selectOne(tbBindUserLand);
+
+            if(bindResult != null){
+                TbUser tbUser = tbUserMapper.selectByPrimaryKey(bindResult.getUlBuyUserId());
+                land.setBuyUsername(tbUser.getUsername());
+            }
+        }
+
+        return tbLandList;
     }
 
     @Override

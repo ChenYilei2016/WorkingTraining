@@ -3,6 +3,7 @@ package cn.chenyilei.work.web.service;
 import cn.chenyilei.work.domain.dto.ActivitiesQueryParam;
 import cn.chenyilei.work.domain.dto.PageRequest;
 import cn.chenyilei.work.domain.pojo.activities.TbActivities;
+import cn.chenyilei.work.domain.pojo.activities.ext.SellallVo;
 
 import java.util.List;
 
@@ -27,4 +28,6 @@ public interface TbActivitiesService {
     List<TbActivities> selectAll(ActivitiesQueryParam param, PageRequest pageRequest);
 
     List<TbActivities> selectCustomerList(ActivitiesQueryParam param, PageRequest pageRequest);
+
+    List<SellallVo> sellall(String startTime);
 }

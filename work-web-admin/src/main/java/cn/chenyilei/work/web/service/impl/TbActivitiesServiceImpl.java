@@ -4,6 +4,7 @@ import cn.chenyilei.work.domain.dto.ActivitiesQueryParam;
 import cn.chenyilei.work.domain.dto.PageRequest;
 import cn.chenyilei.work.domain.mapper.TbActivitiesMapper;
 import cn.chenyilei.work.domain.pojo.activities.TbActivities;
+import cn.chenyilei.work.domain.pojo.activities.ext.SellallVo;
 import cn.chenyilei.work.domain.pojo.internal_enum.CheckEnum;
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.security.SecurityContext;
@@ -35,7 +36,7 @@ public class TbActivitiesServiceImpl implements TbActivitiesService {
         tbActivities.setActivitiesCreatetime(new Date());
         tbActivities.setActivitiesUpdatetime(new Date());
         tbActivities.setActivitiesStatus(CheckEnum.SUCCESS);
-        tbActivities.setActivitiesIsOpen(false);
+        tbActivities.setActivitiesIsOpen(true);
 
         //设置用户的ID
         AuthenticationUser user = SecurityContext.getSecurityContextPrincipal();
@@ -90,6 +91,13 @@ public class TbActivitiesServiceImpl implements TbActivitiesService {
         tbActivities.setActivitiesUserId(Integer.valueOf(user.getUserId()));
         PageHelper.startPage(pageRequest.getPage(),pageRequest.getPageSize(),ORDERBY_CREATETIME_DESC );
         return tbActivitiesMapper.select(tbActivities);
+    }
+
+    @Override
+    public List<SellallVo> sellall(String startTime) {
+        AuthenticationUser user = SecurityContext.getSecurityContextPrincipal();
+        List<SellallVo> sellallVos = tbActivitiesMapper.querySellallList(Integer.valueOf(user.getUserId()), startTime);
+        return sellallVos;
     }
 
 }

@@ -91,4 +91,7 @@ public class TbLand {
      */
     @Column(name = "land_information")
     private String landInformation;
+
+    @Transient
+    private String buyUsername;
 }

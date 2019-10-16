@@ -42,4 +42,28 @@
     on tbua.ua_activities_id = ta.activities_id
     where tbua.ua_buy_user_id = #{userId}
   </select>
+
+  <select id="querySellallList" resultType="cn.chenyilei.work.domain.pojo.activities.ext.SellallVo">
+    SELECT
+        tao.id as orderId,
+        tu.username ,
+        taod.activities_price,
+        taod.number,
+        tao.createtime,
+        taod.activities_name,
+        taod.activities_image
+    FROM
+        tb_activities_order_detail taod
+        JOIN tb_activities_order tao ON taod.order_id = tao.id
+        JOIN tb_user tu ON tu.user_id = tao.buyer_id
+    WHERE
+        taod.activities_id IN (
+            SELECT ta.activities_id
+             FROM tb_activities ta
+             WHERE ta.activities_user_id = #{userId}
+             <if test="createtime != null and createtime !='' ">
+                 AND ta.activities_createtime > #{createtime}
+             </if>
+        )
+  </select>
 </mapper>

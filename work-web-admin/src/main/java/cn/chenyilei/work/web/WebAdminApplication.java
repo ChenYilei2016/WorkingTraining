@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.web.embedded.TomcatWebServerFactoryCustomizer;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
@@ -72,7 +73,6 @@ public class WebAdminApplication implements CommandLineRunner {
                 ssl.setKeyStore(sslProperties.getKeyStore());
                 ssl.setKeyPassword(sslProperties.getKeyPassword());
                 ssl.setKeyStoreType(sslProperties.getKeyStoreType());
-
 
                 if( factory instanceof TomcatServletWebServerFactory ){
                     TomcatServletWebServerFactory tomcatServletWebServerFactory = (TomcatServletWebServerFactory) factory;

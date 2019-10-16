@@ -3,6 +3,7 @@ package cn.chenyilei.work.domain.dto;
 import com.github.pagehelper.IPage;
 import lombok.Data;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 /**
  * 注释

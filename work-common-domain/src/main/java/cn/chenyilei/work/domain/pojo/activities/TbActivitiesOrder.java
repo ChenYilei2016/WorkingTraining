@@ -26,6 +26,7 @@ public class TbActivitiesOrder {
      * 卖家ID
      */
     @Column(name = "seller_id")
+    @Deprecated
     private Integer sellerId;
 
     /**
