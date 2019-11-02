@@ -31,6 +31,7 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.util.AntPathMatcher;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -50,6 +51,7 @@ import tk.mybatis.spring.annotation.MapperScan;
         "cn.chenyilei.work.domain.mapper",
         "cn.chenyilei.work.web.mapper"
 })
+@EnableScheduling
 public class WebAdminApplication implements CommandLineRunner {
 
     public static void main(String[] args) {

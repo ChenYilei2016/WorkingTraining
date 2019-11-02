@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Table(name = "tb_bind_user_land")
-public class TbBindUserLand {
+public class  TbBindUserLand {
     /**
      * 用户土地关系表ID
      */

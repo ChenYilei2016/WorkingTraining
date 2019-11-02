@@ -19,6 +19,9 @@ public class NormallTest {
     @Test
     public void login() throws FileNotFoundException {
         System.out.println(BCrypt.hashpw("123456"));
+        int a = 50;
+        a = a++ * 10;
+        System.out.println(a);
 
     }
 

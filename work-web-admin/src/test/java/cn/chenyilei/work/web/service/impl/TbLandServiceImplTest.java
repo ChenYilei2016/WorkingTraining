@@ -30,7 +30,7 @@ public class TbLandServiceImplTest {
     TbLandOrderMapper tbLandOrderMapper;
     @Test
     public void selectAll() {
-        System.out.println(tbLandOrderMapper.selectOrderExtById(11));
+        System.out.println(tbLandMapper.randOne());
 
     }
 

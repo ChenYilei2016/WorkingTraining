@@ -79,4 +79,9 @@ public class TbUserServiceImpl extends CommonServiceImpl<TbUser,TbUserMapperExt>
         TbUser tbUser = tbUserMapperExt.selectByPrimaryKey(user.getUserId());
         return tbUser;
     }
+
+    @Override
+    public TbUser selectUserDetailById(String userId) {
+        return tbUserMapperExt.selectByPrimaryKey(userId);
+    }
 }

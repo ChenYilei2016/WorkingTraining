@@ -9,4 +9,17 @@
     <result column="ul_user_id" jdbcType="INTEGER" property="ulUserId" />
     <result column="ul_land_id" jdbcType="INTEGER" property="ulLandId" />
   </resultMap>
+
+
+  <select id="selectVoAll" resultType="cn.chenyilei.work.domain.pojo.land.ext.TbBindUserLandVo">
+  SELECT
+      tbul.*,
+      tu1.username AS 'buyName',
+      tu2.username AS 'sellName'
+  FROM
+      tb_bind_user_land tbul
+      JOIN tb_user tu1 ON tbul.ul_buy_user_id = tu1.user_id
+      join tb_user tu2 on tbul.ul_sell_user_id = tu2.user_id
+
+  </select>
 </mapper>

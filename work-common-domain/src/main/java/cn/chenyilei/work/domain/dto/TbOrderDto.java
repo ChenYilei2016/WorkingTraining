@@ -20,6 +20,11 @@ import java.util.List;
 public class TbOrderDto {
     private Integer orderId;
 
+    //用于购物车下订单
     private List<Integer> cartIds;
+
+
+    //用于直接购买
     private Integer produceId;
+    private Integer produceNumber;
 }

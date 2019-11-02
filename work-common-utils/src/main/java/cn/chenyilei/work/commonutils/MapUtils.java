@@ -15,6 +15,8 @@ import java.util.Map;
 public class MapUtils {
 
     public static <K,V> Map<K,V> toMap(List<K> keyList, List<V> valueList){
+        System.err.println(keyList);
+        System.err.println(valueList);
         if(null == keyList || valueList == null){
             throw new NullPointerException("MapUtils toMap 参数错误,不能为null!");
         }

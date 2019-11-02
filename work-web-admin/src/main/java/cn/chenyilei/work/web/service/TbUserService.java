@@ -18,4 +18,6 @@ public interface TbUserService extends CommonService<TbUser>{
     void update(String userId, WxUserRequestBody wxUserRequestBody);
 
     TbUser selectUserDetail();
+
+    TbUser selectUserDetailById(String userId);
 }

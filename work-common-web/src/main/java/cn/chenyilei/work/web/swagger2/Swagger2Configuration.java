@@ -26,7 +26,8 @@ public class Swagger2Configuration {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cn.chenyilei.work"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                ;
     }
 
     private ApiInfo apiInfo() {

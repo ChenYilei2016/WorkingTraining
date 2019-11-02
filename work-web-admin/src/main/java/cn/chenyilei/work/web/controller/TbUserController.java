@@ -33,6 +33,13 @@ public class TbUserController{
     @Autowired
     WxUserDetailService wxUserDetailService;
 
+    @ApiOperation("得到指定用户ID的相关信息!")
+    @GetMapping("/detail/{userId}")
+    public AjaxResult<TbUser> userDetailById(@PathVariable(name = "userId")String userId){
+        TbUser tbUser = tbUserService.selectUserDetailById(userId);
+        return AjaxResult.success(tbUser,"查询成功!");
+    }
+
     @ApiOperation("得到用户的相关信息!")
     @GetMapping("/detail")
     public AjaxResult<TbUser> userDetail(){

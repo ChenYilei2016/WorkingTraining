@@ -14,9 +14,11 @@ import java.util.List;
  * @date 2019/09/25 14:28
  */
 public interface TbPlantingService {
-    List<TbPlanting> selectAll(PageRequest pageRequest);
+    List<TbPlanting> selectAll(PageRequest pageRequest, Boolean isCustomer);
 
     void insertOne(PlantingRequestParam.insertOne param);
 
     void deleteOne(Integer plantingId);
+
+    List<TbPlanting> selectOneByLandId(Integer landId);
 }

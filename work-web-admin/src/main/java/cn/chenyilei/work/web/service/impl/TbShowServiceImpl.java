@@ -33,6 +33,8 @@ public class TbShowServiceImpl implements TbShowService {
     @Override
     public List<TbShow> selectAll(PageRequest pageRequest) {
         PageHelper.startPage(pageRequest.getPage(),pageRequest.getPageSize(),false);
+        PageHelper.orderBy("show_createtime desc");
+
         List<TbShow> tbShows = tbShowMapper.selectAll();
         return tbShows;
     }
@@ -41,6 +43,8 @@ public class TbShowServiceImpl implements TbShowService {
     public List<TbShow> selectMyList(PageRequest pageRequest) {
         AuthenticationUser user = SecurityContext.getSecurityContextPrincipal();
         PageHelper.startPage(pageRequest.getPage(),pageRequest.getPageSize(),false);
+        PageHelper.orderBy("show_createtime desc");
+
         TbShow tbShow = new TbShow();
         tbShow.setShowUserId(Integer.valueOf(user.getUserId()));
         List<TbShow> tbShows = tbShowMapper.select(tbShow);

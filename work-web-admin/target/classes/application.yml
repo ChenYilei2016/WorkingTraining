@@ -1,6 +1,6 @@
 server:
 #  port: 9090 #远程使用
-  port: 8081 #本地测试
+  port: ${PORT:8081} #本地测试
   servlet:
     session:
       timeout: 1800000 # 30分钟过期sessionco
@@ -16,7 +16,7 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://chenyilei.test:3306/worktraining?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://chenyilei.test:3306/worktraining?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai #数据库连接
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 8
@@ -40,6 +40,7 @@ spring:
   jackson:
     default-property-inclusion: non_null
     date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 #  session:
 #    store-type: redis
 
@@ -52,7 +53,7 @@ mybatis:
 cyl:
   security:
     enabled-security: false
-    enabled-swagger: true     #启用swagger文档
+    enabled-swagger: true     #是否启用swagger api文档
     login-path: /authentication/login/*
     login-page: /index.html
     authentication-type: jwt    #登陆方式 normal 或 jwt形式,可扩展

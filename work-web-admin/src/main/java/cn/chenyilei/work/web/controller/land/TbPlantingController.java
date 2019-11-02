@@ -35,8 +35,8 @@ public class TbPlantingController {
 
     @ApiOperation("查询账号所有的种植信息![区分登陆账号]")
     @GetMapping("/selectAll")
-    public AjaxResult<List<TbPlanting>> selectAll(PageRequest pageRequest){
-        List<TbPlanting> tbPlantings =plantingService.selectAll(pageRequest);
+    public AjaxResult<List<TbPlanting>> selectAll(PageRequest pageRequest,Boolean isCustomer){
+        List<TbPlanting> tbPlantings =plantingService.selectAll(pageRequest,isCustomer);
         return AjaxPageResult
                 .builder()
                 .success(true)
@@ -44,6 +44,13 @@ public class TbPlantingController {
                 .data(tbPlantings)
                 .pageRequest(pageRequest);
     }
+    @ApiOperation("查询田的具体种植信息")
+    @GetMapping("/selectOneByLandId")
+    public AjaxResult<List<TbPlanting>> selectOneByLandId(@RequestParam(name = "landId")Integer landId){
+        List<TbPlanting> tbPlanting = plantingService.selectOneByLandId(landId);
+        return AjaxResult.success(tbPlanting,"查询成功");
+    }
+
 
     @ApiOperation("农户发布一条关于田的种植信息!")
     @PostMapping("/insertOne")

@@ -49,7 +49,7 @@ public class TbLandOrderController {
             //将商品转成购物车直接进行下单
             LandCartRequestParam.InsertCartOne param = new LandCartRequestParam.InsertCartOne();
             param.setLandId(tbOrderDto.getProduceId());
-            param.setNumber(1);
+            param.setNumber(tbOrderDto.getProduceNumber());
             Integer cartId = tblandCartService.insertCartOne(param);
             tbOrderDto.setCartIds(Arrays.asList(cartId));
         }
@@ -82,6 +82,19 @@ public class TbLandOrderController {
                 .data(tbLandOrders)
                 .pageRequest(pageRequest);
     }
+
+//    //TODO:
+//    @ApiOperation("查询客户具有的订单详情列表")
+//    @GetMapping("/selectMyDetailList")
+//    public AjaxResult<List<TbLandOrderExt>> queryOrdersWithDetail(PageRequest pageRequest){
+//        List<TbLandOrderExt> tbLandOrders = tbLandOrderService.selectMyOrders(pageRequest);
+//        return AjaxPageResult
+//                .builder()
+//                .success(true)
+//                .msg("查询成功!")
+//                .data(tbLandOrders)
+//                .pageRequest(pageRequest);
+//    }
 
     @ApiOperation("查询客户具有的订单和详情")
     @GetMapping("/select/{orderId}")

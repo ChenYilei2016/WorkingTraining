@@ -54,7 +54,7 @@ public class TbActivitiesOrderController {
             //将商品转成购物车直接进行下单
             ActivitiesCartRequestParam.AcInsertCartOne param = new ActivitiesCartRequestParam.AcInsertCartOne();
             param.setActivityId(tbOrderDto.getProduceId());
-            param.setNumber(1);
+            param.setNumber(tbOrderDto.getProduceNumber());
             Integer cartId = tbActivitiesCartService.insertCartOne(param);
             tbOrderDto.setCartIds(Arrays.asList(cartId));
         }

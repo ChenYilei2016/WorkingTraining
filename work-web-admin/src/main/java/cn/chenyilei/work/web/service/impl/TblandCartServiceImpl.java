@@ -39,24 +39,35 @@ public class TblandCartServiceImpl implements TblandCartService {
         return result;
     }
 
+    //如果用户已经有这个物品就追加
     @Override
     public Integer insertCartOne(LandCartRequestParam.InsertCartOne param) {
-        TbLand tbLand = tbLandMapper.selectByPrimaryKey(param.getLandId());
-
-        //将土地中的信息放入购物车中便于查询
-        TbLandCart tbLandCart = new TbLandCart();
-        tbLandCart.setImage(tbLand.getLandImage());
-        tbLandCart.setPrice(tbLand.getLandPrice());
-        tbLandCart.setName(tbLand.getLandName());
-
-        tbLandCart.setId(param.getLandId());
-        tbLandCart.setNumber(param.getNumber());
-
         AuthenticationUser user = SecurityContext.getSecurityContextPrincipal();
-        tbLandCart.setUserId(Integer.valueOf(user.getUserId()));
+        Integer userId = Integer.valueOf(user.getUserId());
+        TbLandCart query = new TbLandCart();
+        query.setUserId(userId);
+        query.setLandId(param.getLandId());
 
-        tbLandCartMapper.insertSelective(tbLandCart);
-        return tbLandCart.getId();
+        TbLandCart result = tbLandCartMapper.selectOne(query);
+        if(null == result){
+            TbLand tbLand = tbLandMapper.selectByPrimaryKey(param.getLandId());
+
+            //将土地中的信息放入购物车中便于查询
+            result = new TbLandCart();
+            result.setImage(tbLand.getLandImage());
+            result.setPrice(tbLand.getLandPrice());
+            result.setName(tbLand.getLandName());
+            result.setNumber(param.getNumber());
+            result.setLandId(param.getLandId());
+            result.setUserId(userId);
+            tbLandCartMapper.insertSelective(result);
+        }else{
+            //追加购物车数量
+            result.setNumber(param.getNumber()+result.getNumber());
+            tbLandCartMapper.updateByPrimaryKey(result);
+        }
+
+        return result.getId();
     }
 
     @Override

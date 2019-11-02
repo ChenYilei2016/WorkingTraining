@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.chenyilei.work.domain.mapper.TbBindUserActivitiesMapper">
+  <resultMap id="BaseResultMap" type="cn.chenyilei.work.domain.pojo.activities.TbBindUserActivities">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ua_id" jdbcType="INTEGER" property="uaId" />
+    <result column="ua_buy_user_id" jdbcType="INTEGER" property="uaBuyUserId" />
+    <result column="ua_sell_user_id" jdbcType="INTEGER" property="uaSellUserId" />
+    <result column="ua_activities_id" jdbcType="INTEGER" property="uaActivitiesId" />
+    <result column="ua_buy_number" jdbcType="INTEGER" property="uaBuyNumber" />
+  </resultMap>
+</mapper>

@@ -8,7 +8,6 @@ import cn.chenyilei.work.domain.pojo.land.TbPlanting;
 import cn.chenyilei.work.domain.security.AuthenticationUser;
 import cn.chenyilei.work.security.SecurityContext;
 import cn.chenyilei.work.web.service.TbPlantingService;
-import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -30,14 +29,21 @@ public class TbPlantingServiceImpl implements TbPlantingService {
 
 
     @Override
-    public List<TbPlanting> selectAll(PageRequest pageRequest) {
+    public List<TbPlanting> selectAll(PageRequest pageRequest, Boolean isCustomer) {
         AuthenticationUser user = SecurityContext.getSecurityContextPrincipal();
         String userId = user.getUserId();
         //区分农户或者客户
-        boolean isCustomer = user.getAuthorities().stream().anyMatch(x -> {
+        boolean isReallyCustomer = user.getAuthorities().stream().anyMatch(x -> {
             return ((GrantedAuthority) x).getAuthority().equals(UserLevelEnum.CUSTOMER.name());
         });
-        if(isCustomer){
+
+        if(isCustomer != null && isCustomer == true){
+            return tbPlantingMapper.selectAllWithCustomer(userId);
+        }else if(isCustomer != null && isCustomer == false){
+            return tbPlantingMapper.selectAllWithFarmer(userId);
+        }
+
+        if(isReallyCustomer){
             return tbPlantingMapper.selectAllWithCustomer(userId);
         }else{
             return tbPlantingMapper.selectAllWithFarmer(userId);
@@ -58,5 +64,13 @@ public class TbPlantingServiceImpl implements TbPlantingService {
     @Override
     public void deleteOne(Integer plantingId) {
         tbPlantingMapper.deleteByPrimaryKey(plantingId);
+    }
+
+    @Override
+    public List<TbPlanting> selectOneByLandId(Integer landId) {
+        TbPlanting tbPlanting = new TbPlanting();
+        tbPlanting.setPlantingLandId(landId);
+        List<TbPlanting> result = tbPlantingMapper.select(tbPlanting);
+        return result;
     }
 }

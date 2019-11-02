@@ -43,10 +43,9 @@ public class MvcGlobalConfigure implements WebMvcConfigurer {
 //    @Override
 //    public void addCorsMappings(CorsRegistry registry) {
 //        registry.addMapping("/**")
-//                .allowCredentials(true)
-//                .allowedMethods("*")
-//                .allowedHeaders("*")
-//        .all
+//                .allowedOrigins("*")
+//                .allowedMethods("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE")
+//                .allowCredentials(true);
 //                ;
 //    }
 }
